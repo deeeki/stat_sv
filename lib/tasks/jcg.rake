@@ -18,7 +18,7 @@ namespace :jcg do
       end
     end
     round = result_page.search('#jcgcore_head_menu h1.jcgcore-h1 span.nobr').last.text.strip
-    name = result_page.at('#jcgcore_head_menu h1.jcgcore-h1').text.gsub(round, '').strip
+    name = result_page.at('.twitter-share-button')['data-text'].gsub(round, '').strip
     date = result_page.at('p.datetime').text.scan(%r[\d+/\d+/\d+]).first
     tournament = Tournament.find_or_create_by(id: tour_id, name: name, held_on: Date.parse(date), round: round)
 

@@ -13,8 +13,8 @@ namespace :jcg do
     result_page = AGENT.get(RESULT + tour_id)
     result_page.search('div#jcgcore_entry_list').each do |group_section|
       group_section.search('a.hover-blue').each_with_index do |player, i|
-        player_id = player['href'].scan(/\d+/).first.to_i
-        player_ranks[player_id] = { rank: i < 3 ? i + 1 : 3 }
+        user_id = player['href'].scan(/\d+/).first.to_i
+        player_ranks[user_id] = { rank: i < 3 ? i + 1 : 3 }
       end
     end
     round = result_page.search('#jcgcore_head_menu h1.jcgcore-h1 span.nobr').last.text.strip
@@ -36,9 +36,9 @@ namespace :jcg do
         players = []
         page.search('div.team_wrap').each do |team|
           player = team.at('a.hover-blue')
-          player_id = player['href'].scan(/\d+/).first.to_i
+          user_id = player['href'].scan(/\d+/).first.to_i
 
-          if stored_player = Player.find_by(tournament: tournament, player_id: player_id)
+          if stored_player = Player.find_by(tournament: tournament, user_id: user_id)
             players << stored_player
             next
           end
@@ -49,8 +49,10 @@ namespace :jcg do
           }.sort
           archetype1, archetype2 = [deck_url1, deck_url2].map{|url| Archetype.detect(url) }.compact
 
-          players << Player.create({
-            player_id: player_id,
+          user = User.find_or_create_by(id: user_id)
+          user.update(name: player_name)
+
+          players << user.players.create({
             tournament: tournament,
             group: group,
             name: player_name,
@@ -58,7 +60,7 @@ namespace :jcg do
             deck_url2: deck_url2,
             archetype1: archetype1,
             archetype2: archetype2,
-          }.merge(player_ranks[player_id] || {}))
+          }.merge(player_ranks[user_id] || {}))
         end
 
         match = Match.find_or_initialize_by(id: match_url.split('/').last, tournament: tournament)

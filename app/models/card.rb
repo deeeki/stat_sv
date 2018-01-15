@@ -26,6 +26,7 @@ class Card
   field :base_card_id, type: Integer
   field :tokens, type: String
   field :normal_card_id, type: Integer
+  field :format_type, type: Integer
   belongs_to :clan
 
   ALTERNATIVES = {

@@ -12,3 +12,10 @@ Clan.delete_all
 }.each do |name, id|
   Clan.create(id: id, name: name)
 end
+
+Archetype.delete_all
+%w[u r].each do |format|
+  YAML.load_file(Rails.root.join("db/seeds/#{format}_archetypes.yml")).each do |archetype|
+    Archetype.create(archetype)
+  end
+end

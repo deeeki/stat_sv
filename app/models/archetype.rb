@@ -16,7 +16,7 @@ class Archetype
     end
 
     def normalize hash_str
-      Card::ALTERNATIVES.inject(hash_str){|str, (alt, base)| str.gsub(alt, base) }
+      Card.alt_codes.inject(hash_str){|str, (alt, base)| str.gsub(alt, base) }
     end
 
     private

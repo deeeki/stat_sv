@@ -162,4 +162,17 @@ namespace :jcg do
     end
     File.write("stats.csv", csv_str)
   end
+
+  task dump: :environment do
+    require 'csv'
+    tour_id = ENV['TOUR'].scan(/\d+/).first
+    tournament = Tournament.find(tour_id)
+    csv_str = CSV.generate do |csv|
+      csv << %w[大会ID 日付 ユーザーID 名前 順位 デッキタイプ1 デッキタイプ2 デッキURL1 デッキURL2]
+      tournament.players.sort_by{|p| p.rank || 5 }.each do |p|
+        csv << [tour_id, tournament.held_on, p.user_id, p.name, p.rank, p.archetype1&.name, p.archetype2&.name, p.deck_url1, p.deck_url2]
+      end
+    end
+    File.write("#{tour_id}.csv", csv_str)
+  end
 end

@@ -48,4 +48,12 @@ namespace :portal do
       end
     end
   end
+
+  task alt_cards: :environment do
+    alt_cards = Card.where('this.base_card_id != this.card_id').map do |alt|
+      base = Card.find(alt.base_card_id)
+      %[#{alt.code}: #{base.code} # #{alt.card_name}]
+    end
+    File.write('config/alt_cards.yml', alt_cards.join("\n"))
+  end
 end

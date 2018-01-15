@@ -137,7 +137,7 @@ namespace :jcg do
       end
     end
 
-    Battle.each do |b|
+    Battle.gte(battled_on: Date.today.beginning_of_month).each do |b|
       wins[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.lost_archetype.name][b.won_archetype.name] += 1

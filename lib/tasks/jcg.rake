@@ -124,7 +124,7 @@ namespace :jcg do
     puts "Battle count: #{Battle.where(tournament: tournament).count}"
   end
 
-  task stats: :environment do
+  task battle_stats: :environment do
     require 'csv'
     wins = {}
     totals = {}
@@ -160,8 +160,44 @@ namespace :jcg do
         csv << [a1, total_count, win_count, rate] + cols
       end
     end
-    File.write("stats.csv", csv_str)
+    File.write("battle_stats.csv", csv_str)
   end
+
+  task qualifier_stats: :environment do
+    require 'csv'
+    DEFAULTS = { used: 0, qualified: 0, sample_url: nil }.freeze
+    stats = {}
+
+    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.where(round: 'グループ予選').gte(held_on: Date.today.beginning_of_month).pluck(:id)
+    players = Player.in(tournament_id: tournament_ids)
+    players.each do |player|
+      stats[player.archetype1] ||= DEFAULTS.dup
+      stats[player.archetype2] ||= DEFAULTS.dup
+      stats[player.archetype1][:used] += 1
+      stats[player.archetype2][:used] += 1
+      if player.rank == 1
+        stats[player.archetype1][:qualified] += 1
+        stats[player.archetype2][:qualified] += 1
+      end
+      stats[player.archetype1][:sample_url] ||= player.deck_url1
+      stats[player.archetype2][:sample_url] ||= player.deck_url2
+    end
+    players_count = players.count
+    stats = Hash[stats.sort_by{|_, v| - v[:used] }]
+
+    csv_str = CSV.generate do |csv|
+      csv << %w[デッキタイプ 使用者 予選突破者 使用率 予選突破率 予選突破使用率 デッキ例]
+      stats.each do |archetype, s|
+        use_rate = (s[:used].to_f / players_count * 100).round(2)
+        qualified_rate = (s[:qualified].to_f / s[:used] * 100).round(2)
+        occupancy = (s[:qualified].to_f / 16 / tournament_ids.size * 100).round(2)
+        csv << [archetype.name, s[:used], s[:qualified], use_rate, qualified_rate, occupancy, s[:sample_url]]
+      end
+    end
+    suffix = ENV['TOUR'] ? ENV['TOUR'] : Date.today.strftime('%Y%m')
+    File.write("qualifier_stats_#{suffix}.csv", csv_str)
+  end
+
 
   task dump: :environment do
     require 'csv'

@@ -20,7 +20,8 @@ namespace :jcg do
     round = result_page.search('#jcgcore_head_menu h1.jcgcore-h1 span.nobr').last.text.strip
     name = result_page.at('.twitter-share-button')['data-text'].gsub(round, '').strip
     date = result_page.at('p.datetime').text.scan(%r[\d+/\d+/\d+]).first
-    tournament = Tournament.find_or_create_by(id: tour_id, name: name, held_on: Date.parse(date), round: round)
+    format = result_page.at('#jcgcore_category_menu h1.jcgcore-h1 a')['href'].split('/').last
+    tournament = Tournament.find_or_create_by(id: tour_id, name: name, format: format, held_on: Date.parse(date), round: round)
 
     group_matches = {}
     gamelist_page = AGENT.get(GAMELIST + tour_id)
@@ -47,7 +48,7 @@ namespace :jcg do
           deck_url1, deck_url2 = team.search('a[target="_svp"]').map{|e| e['href'] }.map{|url|
             url.sub(%r[deckbuilder/create/\d\?hash=], 'deck/')
           }.sort
-          archetype1, archetype2 = [deck_url1, deck_url2].map{|url| Archetype.detect(url) }.compact
+          archetype1, archetype2 = [deck_url1, deck_url2].map{|url| Archetype.detect(url, format) }.compact
 
           user = User.find_or_create_by(id: user_id)
           user.update(name: player_name)
@@ -107,6 +108,7 @@ namespace :jcg do
 
               Battle.find_or_create_by(
                 tournament: tournament,
+                format: format,
                 match: match,
                 battled_on: tournament.held_on,
                 number: i + 1,
@@ -125,19 +127,21 @@ namespace :jcg do
   end
 
   task battle_stats: :environment do
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     require 'csv'
     wins = {}
     totals = {}
-    Archetype.each do |a1|
+    archetypes = Archetype.with_format(format)
+    archetypes.each do |a1|
       wins[a1.name] = {}
       totals[a1.name] = {}
-      Archetype.each do |a2|
+      archetypes.each do |a2|
         wins[a1.name][a2.name] = 0
         totals[a1.name][a2.name] = 0
       end
     end
 
-    Battle.gte(battled_on: Date.today.beginning_of_month).each do |b|
+    Battle.with_format(format).gte(battled_on: Date.today.beginning_of_month).each do |b|
       wins[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.lost_archetype.name][b.won_archetype.name] += 1
@@ -168,7 +172,8 @@ namespace :jcg do
     DEFAULTS = { used: 0, qualified: 0, sample_url: nil }.freeze
     stats = {}
 
-    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.where(round: 'グループ予選').gte(held_on: Date.today.beginning_of_month).pluck(:id)
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: 'グループ予選').gte(held_on: Date.today.beginning_of_month).pluck(:id)
     players = Player.in(tournament_id: tournament_ids)
     players.each do |player|
       stats[player.archetype1] ||= DEFAULTS.dup

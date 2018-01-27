@@ -10,9 +10,9 @@ class Archetype
   belongs_to :clan
 
   class << self
-    def detect hash_str
+    def detect hash_str, format = :rotation
       clan_id, deck = convert(normalize(hash_str.split('/').last))
-      where(clan_id: clan_id).order_by(detection_order: :asc).entries.find do |archetype|
+      with_format(format).where(clan_id: clan_id).order_by(detection_order: :asc).entries.find do |archetype|
         archetype.match?(deck)
       end
     end

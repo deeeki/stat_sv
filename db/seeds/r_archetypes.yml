@@ -1,1 +1,170 @@
---- []
+---
+- clan_id: 1
+  name: ニュートE
+  detection_order: 1
+  conditions:
+  - 6GgLs: 2 # ヘクトル
+- clan_id: 1
+  name: 白狼E
+  detection_order: 2
+  conditions:
+  - 69SwI: 1 # 白狼
+    6KvLS: 1 # キングエレファント
+- clan_id: 1
+  name: アグロE
+  detection_order: 3
+  conditions:
+  - 5zvAY: 3 # ウォーターフェアリー
+    6KrBg: 2 # 妖精の調べ
+- clan_id: 1
+  name: テンポE
+  detection_order: 4
+  conditions:
+  - 6DEdC: 2 # エリン
+    6KvLI: 2 # カシオペア
+- clan_id: 2
+  name: アグロR
+  detection_order: 1
+  conditions:
+  - 6LG2Q: 1 # 円卓会議
+    6HMI2: 2 # マスタークノイチ
+- clan_id: 2
+  name: コンR
+  detection_order: 2
+  conditions:
+  - 6DfTo: 1 # ローラン
+- clan_id: 2
+  name: ミッドR
+  detection_order: 3
+  conditions:
+  - 6DabS: 2 # ルミナスメイジ
+- clan_id: 3
+  name: ニュートW
+  detection_order: 4
+  conditions:
+  - 6HkiY: 3 # スイーツウィッチ
+- clan_id: 3
+  name: 白銀剣W
+  detection_order: 1
+  conditions:
+  - 6PUJS: 2 # 白銀剣のゴーレム
+- clan_id: 3
+  name: 秘術W
+  detection_order: 2
+  conditions:
+  - 6HkyA: 2 # 大釜
+- clan_id: 3
+  name: ドロシーW
+  detection_order: 3
+  conditions:
+  - 6ADlI: 3 # ドロシー
+- clan_id: 4
+  name: 原初D
+  detection_order: 1
+  conditions:
+  - 6M2ao: 3 # 原初
+- clan_id: 4
+  name: フェイスD
+  detection_order: 2
+  conditions:
+  - 5zWm2: 3 # ゴブリン
+    6ENsi: 1 # アイナ
+- clan_id: 4
+  name: クロノスD
+  detection_order: 3
+  conditions:
+  - 6OL3o: 2 # クロノス
+- clan_id: 4
+  name: 無謀D
+  detection_order: 4
+  conditions:
+  - 6ICFA: 2 # 無謀なる戦
+- clan_id: 4
+  name: ランプD
+  detection_order: 5
+  conditions:
+  - 6EQIo: 3 # 水竜神の巫女
+    694Vo: 2 # バハムート
+- clan_id: 5
+  name: ダリスNc
+  detection_order: 1
+  conditions:
+  - 6CnpI: 3 # 力比べ
+    6IcsI: 2 # ダークアリス
+- clan_id: 5
+  name: ネフNc
+  detection_order: 2
+  conditions:
+  - 6A-aI: 3 # ネフティス
+- clan_id: 5
+  name: リアニNc
+  detection_order: 3
+  conditions:
+  - 6QCi2: 2 # 死竜の使い手
+    6Cueo: 1 # ゼウス
+- clan_id: 5
+  name: ミッドNc
+  detection_order: 4
+  conditions:
+  - 6EojS: 2 # ヘクター
+    6EmHM: 1 # 不死の大王
+  - 6EojS: 3 # ヘクター
+- clan_id: 6
+  name: ヨルムンV
+  detection_order: 1
+  conditions:
+  - 6MkXc: 3 # デビルシープ
+    6MpPy: 2 # ヨルムンガンド
+- clan_id: 6
+  name: ニュートV
+  detection_order: 2
+  conditions:
+  - 6GgLs: 3 # ヘクトル
+- clan_id: 6
+  name: コンV
+  detection_order: 3
+  conditions:
+  - 6F6kY: 2 # 黒死
+    6IyqY: 2 # エメラダ
+- clan_id: 6
+  name: 復讐V
+  detection_order: 4
+  conditions:
+  - 6FB7o: 3 # ベルフェ
+    6F6Fm: 2 # カオスシップ
+  - 6FB7o: 3 # ベルフェ
+    5_pFg: 2 # ダークジェネラル
+- clan_id: 7
+  name: 邪教B
+  detection_order: 1
+  conditions:
+  - 6NBqS: 3 # 邪教の権化
+- clan_id: 7
+  name: 教会B
+  detection_order: 2
+  conditions:
+  - 6Qzmg: 1 # 頂きの教会
+    6Q_zS: 2 # ヘヴンリーナイト
+- clan_id: 7
+  name: イージスB
+  detection_order: 3
+  conditions:
+  - 6NBqI: 3 # アイテール
+    6FZYS: 1 # イージス
+- clan_id: 8
+  name: 加速Nm
+  detection_order: 1
+  conditions:
+  - 6RHYc: 3 # 加速装置
+    6ROO6: 3 # デウスエクスマキナ
+- clan_id: 8
+  name: 人形Nm
+  detection_order: 2
+  conditions:
+  - 6RHYS: 1 # パペットルーム
+    6RJW4: 3 # ノア
+- clan_id: 8
+  name: ミッドNm
+  detection_order: 3
+  conditions:
+  - 6RONy: 3 # スピネ

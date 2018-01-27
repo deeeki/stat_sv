@@ -14,8 +14,8 @@ Clan.delete_all
 end
 
 Archetype.delete_all
-%w[u r].each do |format|
-  YAML.load_file(Rails.root.join("db/seeds/#{format}_archetypes.yml")).each do |archetype|
-    Archetype.create(archetype)
+%w[unlimited rotation].each do |format|
+  YAML.load_file(Rails.root.join("db/seeds/#{format.first}_archetypes.yml")).each do |archetype|
+    Archetype.create(archetype.merge(format: format))
   end
 end

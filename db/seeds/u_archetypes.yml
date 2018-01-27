@@ -1,175 +1,148 @@
 ---
 - clan_id: 1
   name: 冥府E
-  format_type: 0
   detection_order: 1
   conditions:
   - 61QWQ: 2 # 新たなる運命
     61Q1A: 2 # 冥府への道
 - clan_id: 1
   name: ニュートE
-  format_type: 0
   detection_order: 2
   conditions:
   - 6GgLs: 2 # ヘクトル
 - clan_id: 1
   name: 白狼E
-  format_type: 0
   detection_order: 3
   conditions:
   - 69SwI: 1 # 白狼
     6KvLS: 1 # キングエレファント
 - clan_id: 1
   name: アグロE
-  format_type: 0
   detection_order: 4
   conditions:
   - 5zWm2: 3 # ゴブリン
     6KrBg: 2 # 妖精の調べ
 - clan_id: 1
   name: OTKE
-  format_type: 0
   detection_order: 5
   conditions:
   - 61oCC: 3 # リノセウス
     68_dS: 2 # フィーナ
 - clan_id: 1
   name: テンポE
-  format_type: 0
   detection_order: 6
   conditions:
   - 6DEdC: 2 # エリン
     6KvLI: 2 # カシオペア
 - clan_id: 2
   name: ニュートR
-  format_type: 0
   detection_order: 1
   conditions:
   - 68_dc: 3 # リリエル
 - clan_id: 2
   name: アグロR
-  format_type: 0
   detection_order: 2
   conditions:
   - 628BY: 3 # プリヴァン
 - clan_id: 2
   name: コンR
-  format_type: 0
   detection_order: 3
   conditions:
   - 6DfTo: 1 # ローラン
 - clan_id: 2
   name: ミッドR
-  format_type: 0
   detection_order: 4
   conditions:
   - 6DabS: 1 # ルミナスメイジ
 - clan_id: 3
   name: 力場W
-  format_type: 0
   detection_order: 1
   conditions:
   - 62ZGg: 2 # 魔導の力場
 - clan_id: 3
   name: 冥府W
-  format_type: 0
   detection_order: 2
   conditions:
   - 61QWQ: 2 # 新たなる運命
     61Q1A: 2 # 冥府への道
 - clan_id: 3
   name: ニュートW
-  format_type: 0
   detection_order: 3
   conditions:
   - 6HkiY: 3 # スイーツウィッチ
 - clan_id: 3
   name: 秘術W
-  format_type: 0
   detection_order: 4
   conditions:
   - 6HkyA: 2 # 大釜
 - clan_id: 3
   name: ドロシーW
-  format_type: 0
   detection_order: 5
   conditions:
   - 6ADlI: 3 # ドロシー
 - clan_id: 3
   name: 超越W
-  format_type: 0
   detection_order: 6
   conditions:
   - 62Zm4: 3 # 超越
 - clan_id: 4
   name: 原初D
-  format_type: 0
   detection_order: 1
   conditions:
   - 6M2ao: 3 # 原初
 - clan_id: 4
   name: OTKD
-  format_type: 0
   detection_order: 2
   conditions:
   - 66giW: 3 # 竜少女
 - clan_id: 4
   name: 魔海D
-  format_type: 0
   detection_order: 3
   conditions:
   - 62xRi: 1 # ジェネシス
     6Giny: 2 # 魔海
 - clan_id: 4
   name: フェイスD
-  format_type: 0
   detection_order: 4
   conditions:
   - 62sZ2: 3 # アイボリー
     62zty: 3 # フォルテ
 - clan_id: 4
   name: ランプD
-  format_type: 0
   detection_order: 5
   conditions:
   - 6EQIo: 3 # 水竜神の巫女
     694Vo: 2 # バハムート
 - clan_id: 5
   name: 骸Nc
-  format_type: 0
   detection_order: 1
   conditions:
   - 6KUzo: 2 # 階段
     63MIS: 2 # 骸
 - clan_id: 5
   name: ダリスNc
-  format_type: 0
   detection_order: 2
   conditions:
   - 6CnpI: 3 # 力比べ
     6IcsI: 2 # ダークアリス
 - clan_id: 5
   name: タイラントNc
-  format_type: 0
   detection_order: 3
   conditions:
   - 63JsW: 3 # デスタイラント
 - clan_id: 5
   name: ネフNc
-  format_type: 0
   detection_order: 4
   conditions:
   - 6A-aI: 3 # ネフティス
 - clan_id: 5
   name: アグロNc
-  format_type: 0
   detection_order: 5
   conditions:
   - 63Kaw: 2 # ハウル
     63MII: 3 # ケルベロス
 - clan_id: 5
   name: ミッドNc
-  format_type: 0
   detection_order: 6
   conditions:
   - 6EojS: 2 # ヘクター
@@ -177,20 +150,17 @@
   - 6EojS: 3 # ヘクター
 - clan_id: 6
   name: ヨルムンV
-  format_type: 0
   detection_order: 1
   conditions:
   - 6MkXc: 3 # デビルシープ
     6MpPy: 2 # ヨルムンガンド
 - clan_id: 6
   name: ニュートV
-  format_type: 0
   detection_order: 2
   conditions:
   - 6GgLs: 3 # ヘクトル
 - clan_id: 6
   name: コンV
-  format_type: 0
   detection_order: 3
   conditions:
   - 6F6kY: 2 # 黒死
@@ -198,7 +168,6 @@
     63i_a: 3 # 黙示録
 - clan_id: 6
   name: 復讐V
-  format_type: 0
   detection_order: 4
   conditions:
   - 6FB7o: 3 # ベルフェ
@@ -207,7 +176,6 @@
     5_pFg: 2 # ダークジェネラル
 - clan_id: 6
   name: アグロV
-  format_type: 0
   detection_order: 5
   conditions:
   - 67WPs: 3 # ヴァンピィ
@@ -216,59 +184,50 @@
     6I_Go: 1 # カラボス
 - clan_id: 7
   name: エイラB
-  format_type: 0
   detection_order: 1
   conditions:
   - 67v3q: 3 # エイラ
 - clan_id: 7
   name: 邪教B
-  format_type: 0
   detection_order: 2
   conditions:
   - 6NBqS: 3 # 邪教の権化
 - clan_id: 7
   name: セラフB
-  format_type: 0
   detection_order: 3
   conditions:
   - 67xlY: 2 # 熾天使
 - clan_id: 7
   name: 疾走B
-  format_type: 0
   detection_order: 4
   conditions:
   - 640IQ: 2 # 神鳥
     67uqM: 2 # ガルラ
 - clan_id: 7
   name: イージスB
-  format_type: 0
   detection_order: 5
   conditions:
   - 645Pw: 3 # テミス
     6FZYS: 1 # イージス
 - clan_id: 8
   name: 冥府Nm
-  format_type: 0
   detection_order: 1
   conditions:
   - 61Q1A: 2 # 冥府への道
 - clan_id: 8
   name: 加速Nm
-  format_type: 0
   detection_order: 2
   conditions:
   - 6RHYc: 3 # 加速装置
     6ROO6: 3 # デウスエクスマキナ
 - clan_id: 8
   name: 人形Nm
-  format_type: 0
   detection_order: 3
   conditions:
   - 6RHYS: 1 # パペットルーム
     6RJW4: 3 # ノア
 - clan_id: 8
   name: ミッドNm
-  format_type: 0
   detection_order: 4
   conditions:
   - 6RONy: 3 # スピネ

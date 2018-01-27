@@ -1,7 +1,10 @@
 class Battle
   include Mongoid::Document
+  extend Enumerize
+  field :format, type: String
   field :battled_on, type: Date
   field :number, type: Integer
+  enumerize :format, in: [:rotation, :unlimited], default: :rotation, scope: true
   belongs_to :tournament
   belongs_to :match
   belongs_to :won_player, class_name: 'Player'

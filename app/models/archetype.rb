@@ -1,10 +1,12 @@
 class Archetype
   include Mongoid::Document
   include Mongoid::Timestamps
+  extend Enumerize
   field :name, type: String
-  field :format_type, type: Integer
+  field :format, type: String
   field :detection_order, type: Integer
   field :conditions, type: Array
+  enumerize :format, in: [:rotation, :unlimited], default: :rotation, scope: true
   belongs_to :clan
 
   class << self

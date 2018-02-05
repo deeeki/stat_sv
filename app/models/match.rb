@@ -7,4 +7,5 @@ class Match
   belongs_to :tournament
   belongs_to :won_player, class_name: 'Player'
   belongs_to :lost_player, class_name: 'Player'
+  has_many :battles, dependent: :delete
 end

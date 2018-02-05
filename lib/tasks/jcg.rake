@@ -206,6 +206,33 @@ namespace :jcg do
     File.write("qualifier_stats_#{suffix}.csv", csv_str)
   end
 
+  task usage_changes: :environment do
+    require 'csv'
+    changes = {}
+    totals = {}
+
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    DEFAULTS = Hash[Archetype.with_format(format).map{|a| [a, 0] }].freeze
+    Tournament.with_format(format).where(round: /予選/).gte(held_on: Date.new(2018, 1, 24)).each do |tournament|
+      stats = DEFAULTS.dup
+      tournament.players.each do |player|
+        stats[player.archetype1] += 1
+        stats[player.archetype2] += 1
+      end
+      stats = Hash[stats.sort_by{|_, v| - v }]
+      changes[tournament] = stats
+      totals[tournament] = tournament.players.count
+    end
+
+    tournaments = changes.keys
+    csv_str = CSV.generate do |csv|
+      csv << ['デッキタイプ'] + tournaments.map(&:held_on)
+      changes.values.last.each do |archetype, count|
+        csv << [archetype.name] + tournaments.map{|t| ((changes[t][archetype] || 0).to_f / totals[t] * 100).round(2) }
+      end
+    end
+    File.write("usage_changes.csv", csv_str)
+  end
 
   task dump: :environment do
     require 'csv'

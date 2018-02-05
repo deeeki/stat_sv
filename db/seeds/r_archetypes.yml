@@ -17,7 +17,7 @@
   - 5zvAY: 3 # ウォーターフェアリー
     6KrBg: 2 # 妖精の調べ
 - clan_id: 1
-  name: テンポE
+  name: ミッドE
   detection_order: 4
   conditions:
   - 6DEdC: 2 # エリン
@@ -33,29 +33,50 @@
   detection_order: 2
   conditions:
   - 6DfTo: 1 # ローラン
+  - 694Vo: 1 # バハムート
 - clan_id: 2
   name: ミッドR
   detection_order: 3
   conditions:
   - 6DabS: 2 # ルミナスメイジ
 - clan_id: 3
+  name: 禁忌W
+  detection_order: 1
+  conditions:
+  - 6Hs1S: 3 # 呼び覚まされし禁忌
+    6LgAI: 3 # ステラ
+  - 6Hs1S: 3 # 呼び覚まされし禁忌
+    6Lc0g: 3 # 精神統一
+- clan_id: 3
   name: ニュートW
-  detection_order: 4
+  detection_order: 2
   conditions:
   - 6HkiY: 3 # スイーツウィッチ
 - clan_id: 3
   name: 白銀剣W
-  detection_order: 1
+  detection_order: 3
   conditions:
   - 6PUJS: 2 # 白銀剣のゴーレム
 - clan_id: 3
   name: 秘術W
-  detection_order: 2
+  detection_order: 4
   conditions:
   - 6HkyA: 2 # 大釜
+  - 6LbI6: 3 # フロウ
+- clan_id: 3
+  name: ギガキマドロW
+  detection_order: 5
+  conditions:
+  - 6LgAS: 2 # ギガントキマイラ
+    6ADlI: 2 # ドロシー
+- clan_id: 3
+  name: ギガキマW
+  detection_order: 6
+  conditions:
+  - 6LgAS: 2 # ギガントキマイラ
 - clan_id: 3
   name: ドロシーW
-  detection_order: 3
+  detection_order: 7
   conditions:
   - 6ADlI: 3 # ドロシー
 - clan_id: 4
@@ -75,13 +96,24 @@
   conditions:
   - 6OL3o: 2 # クロノス
 - clan_id: 4
-  name: 無謀D
+  name: 無謀峡谷D
   detection_order: 4
+  conditions:
+  - 6ICFA: 2 # 無謀なる戦
+    6L-BY: 2 # 竜の峡谷
+- clan_id: 4
+  name: 峡谷D
+  detection_order: 5
+  conditions:
+  - 6L-BY: 2 # 竜の峡谷
+- clan_id: 4
+  name: 無謀D
+  detection_order: 6
   conditions:
   - 6ICFA: 2 # 無謀なる戦
 - clan_id: 4
   name: ランプD
-  detection_order: 5
+  detection_order: 7
   conditions:
   - 6EQIo: 3 # 水竜神の巫女
     694Vo: 2 # バハムート
@@ -151,6 +183,7 @@
   conditions:
   - 6NBqI: 3 # アイテール
     6FZYS: 1 # イージス
+  - 6FZYS: 2 # イージス
 - clan_id: 8
   name: 加速Nm
   detection_order: 1

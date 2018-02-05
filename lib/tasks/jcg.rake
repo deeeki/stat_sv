@@ -175,7 +175,7 @@ namespace :jcg do
     stats = {}
 
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: 'グループ予選').gte(held_on: Date.new(2018, 1, 24)).pluck(:id)
+    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: /予選/).gte(held_on: Date.new(2018, 1, 24)).pluck(:id)
     players = Player.in(tournament_id: tournament_ids)
     players.each do |player|
       stats[player.archetype1] ||= DEFAULTS.dup
@@ -190,6 +190,7 @@ namespace :jcg do
       stats[player.archetype2][:sample_url] ||= player.deck_url2
     end
     players_count = players.count
+    qualified_count = players.where(rank: 1).count
     stats = Hash[stats.sort_by{|_, v| - v[:used] }]
 
     csv_str = CSV.generate do |csv|
@@ -197,7 +198,7 @@ namespace :jcg do
       stats.each do |archetype, s|
         use_rate = (s[:used].to_f / players_count * 100).round(2)
         qualified_rate = (s[:qualified].to_f / s[:used] * 100).round(2)
-        occupancy = (s[:qualified].to_f / 16 / tournament_ids.size * 100).round(2)
+        occupancy = (s[:qualified].to_f / qualified_count * 100).round(2)
         csv << [archetype.name, s[:used], s[:qualified], use_rate, qualified_rate, occupancy, s[:sample_url]]
       end
     end

@@ -141,7 +141,7 @@ namespace :jcg do
       end
     end
 
-    Battle.with_format(format).gte(battled_on: Date.today.beginning_of_month).each do |b|
+    Battle.with_format(format).gte(battled_on: Date.new(2018, 1, 24)).each do |b|
       wins[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.lost_archetype.name][b.won_archetype.name] += 1
@@ -173,7 +173,7 @@ namespace :jcg do
     stats = {}
 
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: 'グループ予選').gte(held_on: Date.today.beginning_of_month).pluck(:id)
+    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: 'グループ予選').gte(held_on: Date.new(2018, 1, 24)).pluck(:id)
     players = Player.in(tournament_id: tournament_ids)
     players.each do |player|
       stats[player.archetype1] ||= DEFAULTS.dup

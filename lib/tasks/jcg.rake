@@ -115,7 +115,9 @@ namespace :jcg do
                 won_player: won_player,
                 lost_player: lost_player,
                 won_archetype: won_archetype,
-                lost_archetype: lost_archetype
+                lost_archetype: lost_archetype,
+                won_clan: won_archetype.clan,
+                lost_clan: lost_archetype.clan
               )
             end
           end

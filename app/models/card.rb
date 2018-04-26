@@ -9,8 +9,12 @@ class Card
   field :is_foil, type: Integer
   field :char_type, type: Integer
   field :tribe_name, type: String
+  field :skill, type: String
+  field :skill_option, type: String
   field :skill_disc, type: String
+  field :org_skill_disc, type: String
   field :evo_skill_disc, type: String
+  field :org_evo_skill_disc, type: String
   field :cost, type: Integer
   field :atk, type: Integer
   field :life, type: Integer
@@ -27,6 +31,7 @@ class Card
   field :tokens, type: String
   field :normal_card_id, type: Integer
   field :format_type, type: Integer
+  field :restricted_count, type: Integer
   belongs_to :clan
 
   class << self

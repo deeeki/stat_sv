@@ -2,6 +2,8 @@ API_URL = 'https://shadowverse-portal.com/api/v1/cards?format=json&lang=ja'
 
 namespace :portal do
   namespace :cards do
+    task setup: [:import, :alternatives]
+
     task import: :environment do
       Card.delete_all
 

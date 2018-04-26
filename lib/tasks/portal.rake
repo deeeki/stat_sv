@@ -13,13 +13,13 @@ namespace :portal do
 
       puts "#{Card.count} cards are imported."
     end
-  end
 
-  task alt_cards: :environment do
-    alt_cards = Card.where('this.base_card_id != this.card_id').map do |alt|
-      base = Card.find(alt.base_card_id)
-      %[#{alt.code}: #{base.code} # #{alt.card_name}]
+    task alternatives: :environment do
+      alt_cards = Card.where('this.base_card_id != this.card_id').order(clan_id: :asc, cost: :asc).map do |alt|
+        base = Card.find(alt.base_card_id)
+        %[#{alt.code}: #{base.code} # #{alt.card_name}]
+      end
+      File.write('config/alt_cards.yml', alt_cards.join("\n"))
     end
-    File.write('config/alt_cards.yml', alt_cards.join("\n"))
   end
 end

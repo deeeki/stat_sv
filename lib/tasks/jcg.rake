@@ -48,7 +48,6 @@ namespace :jcg do
           deck_url1, deck_url2 = team.search('a[target="_svp"]').map{|e| e['href'] }.map{|url|
             url.sub(%r[deckbuilder/create/\d\?hash=], 'deck/')
           }.sort
-          archetype1, archetype2 = [deck_url1, deck_url2].map{|url| Archetype.detect(url, format) }.compact
 
           user = User.find_or_create_by(id: user_id)
           user.update(name: player_name)
@@ -59,8 +58,6 @@ namespace :jcg do
             name: player_name,
             deck_url1: deck_url1,
             deck_url2: deck_url2,
-            archetype1: archetype1,
-            archetype2: archetype2,
           }.merge(player_ranks[user_id] || {}))
         end
 
@@ -97,14 +94,14 @@ namespace :jcg do
             won_player_clans = { won_player_name => won_clan_name }
 
             if i.zero?
-              next
+              next # Can't detect 1st battle's lost clan/archetype
             else
               won_player = players.find{|p| p.name == won_player_name }
               lost_player = players.find{|p| p.name != won_player_name }
-              won_archetype = won_player.archetypes.to_a.find{|a| a.clan.name == won_clan_name }
-              lost_archetype = lost_player.archetypes.to_a.find{|a| a.clan.name != won_player_clans[lost_player.name] }
+              won_clan = won_player.clans.find{|c| c.name == won_clan_name }
+              lost_clan = lost_player.clans.find{|c| c.name != won_player_clans[lost_player.name] }
 
-              next if !won_archetype || !lost_archetype
+              next if !won_clan || !lost_clan
 
               Battle.find_or_create_by(
                 tournament: tournament,
@@ -114,10 +111,8 @@ namespace :jcg do
                 number: i + 1,
                 won_player: won_player,
                 lost_player: lost_player,
-                won_archetype: won_archetype,
-                lost_archetype: lost_archetype,
-                won_clan: won_archetype.clan,
-                lost_clan: lost_archetype.clan
+                won_clan: won_clan,
+                lost_clan: lost_clan
               )
             end
           end

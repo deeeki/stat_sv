@@ -9,8 +9,8 @@ class Battle
   belongs_to :match
   belongs_to :won_player, class_name: 'Player'
   belongs_to :lost_player, class_name: 'Player'
-  belongs_to :won_archetype, class_name: 'Archetype'
-  belongs_to :lost_archetype, class_name: 'Archetype'
+  belongs_to :won_archetype, class_name: 'Archetype', optional: true
+  belongs_to :lost_archetype, class_name: 'Archetype', optional: true
   belongs_to :won_clan, class_name: 'Clan'
   belongs_to :lost_clan, class_name: 'Clan'
 end

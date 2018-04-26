@@ -8,8 +8,8 @@ class Player
   field :deck_url2, type: String
   belongs_to :user
   belongs_to :tournament
-  belongs_to :archetype1, class_name: 'Archetype'
-  belongs_to :archetype2, class_name: 'Archetype'
+  belongs_to :archetype1, class_name: 'Archetype', optional: true
+  belongs_to :archetype2, class_name: 'Archetype', optional: true
 
   def clans
     @clans ||= if archetypes.present?

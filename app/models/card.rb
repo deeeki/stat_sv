@@ -38,5 +38,22 @@ class Card
     def alt_codes
       @alt_codes ||= YAML.load_file(Rails.root.join('config/alt_cards.yml'))
     end
+
+    def code_name_index
+      @code_name_index ||= Hash[Card.pluck(:code, :card_name)]
+    end
+
+    def normalize hash_str
+      alt_codes.inject(hash_str){|str, (alt, base)| str.gsub(alt, base) }
+    end
+
+    def convert hash_str
+      array = hash_str.split('.').reject{|s| s.length != 5 }
+      array.inject({}){|deck, card_code| deck[card_code] ||= 0; deck[card_code] += 1; deck }
+    end
+
+    def human_convert hash_str
+      convert(hash_str).inject({}){|deck, (code, count)| deck[code_name_index[code]] = count; deck }
+    end
   end
 end

@@ -11,6 +11,10 @@ class Player
   belongs_to :archetype1, class_name: 'Archetype', optional: true
   belongs_to :archetype2, class_name: 'Archetype', optional: true
 
+  def deck_urls
+    [deck_url1, deck_url2].compact
+  end
+
   def clans
     @clans ||= if archetypes.present?
                  archetypes.map(&:clan)

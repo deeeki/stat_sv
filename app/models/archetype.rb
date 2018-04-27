@@ -11,21 +11,12 @@ class Archetype
 
   class << self
     def detect hash_str, format = :rotation
-      clan_id, deck = convert(normalize(hash_str.split('/').last))
+      normalized = Card.normalize(hash_str.split('/').last)
+      clan_id = normalized[2].to_i
+      deck = Card.convert(normalized)
       with_format(format).where(clan_id: clan_id).order_by(detection_order: :asc).entries.find do |archetype|
         archetype.match?(deck)
       end
-    end
-
-    def normalize hash_str
-      Card.alt_codes.inject(hash_str){|str, (alt, base)| str.gsub(alt, base) }
-    end
-
-    private
-
-    def convert hash_str
-      array = hash_str.split('.')
-      [array[1].to_i, array.drop(2).inject({}){|deck, card_code| deck[card_code] ||= 0; deck[card_code] += 1; deck }]
     end
   end
 

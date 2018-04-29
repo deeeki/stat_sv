@@ -7,4 +7,10 @@ class Period
   field :ended_on, type: Date
   enumerize :card_set_code, in: [:cgs, :dbn], scope: true
   has_many :archetypes
+
+  class << self
+    def current
+      order_by(ended_on: :desc).first
+    end
+  end
 end

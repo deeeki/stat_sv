@@ -22,6 +22,8 @@
   conditions:
   - 5zWm2: 3 # ゴブリン
     6KrBg: 2 # 妖精の調べ
+  - 5zvAY: 3 # ウォーターフェアリー
+    6KrBg: 2 # 妖精の調べ
 - clan_id: 1
   name: OTKE
   detection_order: 5
@@ -30,6 +32,8 @@
     68_dS: 2 # フィーナ
   - 61oCC: 3 # リノセウス
     6SQIs: 2 # バッタ
+  - 61oCC: 3 # リノセウス
+    6SQno: 3 # 妖精花
 - clan_id: 1
   name: ミッドE
   detection_order: 6
@@ -106,14 +110,19 @@
   conditions:
   - 62sZ2: 3 # アイボリー
     62zty: 3 # フォルテ
+  - 62sZ2: 3 # アイボリー
+    6ENsi: 3 # アイナ
 - clan_id: 4
   name: ランプD
   detection_order: 4
   conditions:
   - 6EQIo: 3 # 水竜神の巫女
     694Vo: 2 # バハムート
+  - 6EQIo: 3 # 水竜神の巫女
+    6Tgsy: 2 # リントヴルム
   - 694Vy: 3 # サハクィエル
     6Cuey: 2 # イスラーフィール
+  - 66lqK: 2 # 連なる咆哮
 - clan_id: 5
   name: 骸Nc
   detection_order: 1
@@ -128,26 +137,37 @@
   conditions:
   - 6Cueo: 3 # ゼウス
     6QDQw: 2 # 生と死の逆転
+  - 6Cueo: 3 # ゼウス
+    6U0rC: 3 # 常闇の梟
+  - 63Jsg: 3 # モルディカイ
+    6U0rC: 3 # 常闇の梟
 - clan_id: 5
   name: ダリスNc
   detection_order: 3
   conditions:
-  - 6CnpI: 2 # 力比べ
-    6IcsI: 2 # ダークアリス
+  - 6IcsI: 2 # ダークアリス
+    6CnpI: 2 # 力比べ
+  - 6IcsI: 2 # ダークアリス
+    6EmmI: 2 # 手帳
 - clan_id: 5
   name: ネフNc
   detection_order: 4
   conditions:
   - 6A-aI: 3 # ネフティス
 - clan_id: 5
-  name: アグロNc
+  name: タイラントNc
   detection_order: 5
+  conditions:
+  - 63JsW: 3 # デスタイラント
+- clan_id: 5
+  name: アグロNc
+  detection_order: 6
   conditions:
   - 63Kaw: 2 # ハウル
     63MII: 3 # ケルベロス
 - clan_id: 5
   name: ミッドNc
-  detection_order: 6
+  detection_order: 7
   conditions:
   - 6EojS: 2 # ヘクター
     6EmHM: 1 # 不死の大王
@@ -168,9 +188,9 @@
   detection_order: 3
   conditions:
   - 6F6kY: 2 # 黒死
-    63i_a: 3 # 黙示録
+    63i_a: 2 # 黙示録
   - 67SGY: 2 # 鮮血
-    63i_a: 3 # 黙示録
+    63i_a: 2 # 黙示録
 - clan_id: 6
   name: 復讐V
   detection_order: 4
@@ -181,6 +201,8 @@
     5_pFg: 2 # ダークジェネラル
   - 6FB7o: 3 # ベルフェ
     6QWE2: 2 # 硝子刃
+  - 6FB7o: 3 # ベルフェ
+    6URhy: 2 # 闇喰らいの蝙蝠
   - 63kiy: 2 # ソウルディーラー
     5_pFg: 2 # ダークジェネラル
 - clan_id: 6
@@ -196,36 +218,51 @@
   name: エイラB
   detection_order: 1
   conditions:
-  - 67v3q: 3 # エイラ
+  - 67v3q: 2 # エイラ
 - clan_id: 7
   name: 社B
   detection_order: 2
   conditions:
   - 6Unvg: 3 # 天狐の社
 - clan_id: 7
-  name: 邪教B
+  name: 獅子B
   detection_order: 3
+  conditions:
+  - 6JNhS: 2 # 黄金郷の獅子
+- clan_id: 7
+  name: 邪教B
+  detection_order: 4
   conditions:
   - 6NBqS: 3 # 邪教の権化
 - clan_id: 7
+  name: 陽光B
+  detection_order: 5
+  conditions:
+  - 642UQ: 2 # 守護の陽光
+- clan_id: 7
   name: 教会B
-  detection_order: 4
+  detection_order: 6
   conditions:
   - 6Qzmg: 3 # 教会
 - clan_id: 7
+  name: 聖獅子B
+  detection_order: 7
+  conditions:
+  - 6UjWQ: 3 # 聖獅子の結晶
+- clan_id: 7
   name: セラフB
-  detection_order: 5
+  detection_order: 8
   conditions:
   - 67xlY: 2 # 熾天使
 - clan_id: 7
   name: 疾走B
-  detection_order: 6
+  detection_order: 9
   conditions:
   - 640IQ: 2 # 神鳥
     67uqM: 2 # ガルラ
 - clan_id: 7
   name: イージスB
-  detection_order: 7
+  detection_order: 10
   conditions:
   - 645Pw: 3 # テミス
     6FZYS: 1 # イージス

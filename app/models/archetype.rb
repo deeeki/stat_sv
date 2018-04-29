@@ -11,11 +11,11 @@ class Archetype
   belongs_to :period
 
   class << self
-    def detect hash_str, format = :rotation
+    def detect hash_str, format = :rotation, period = Period.current
       normalized = Card.normalize(hash_str.split('/').last)
       clan_id = normalized[2].to_i
       deck = Card.convert(normalized)
-      with_format(format).where(clan_id: clan_id).order_by(detection_order: :asc).entries.find do |archetype|
+      with_format(format).where(clan_id: clan_id, period_id: period.id).order_by(detection_order: :asc).entries.find do |archetype|
         archetype.match?(deck)
       end
     end

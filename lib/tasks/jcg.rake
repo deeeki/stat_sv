@@ -123,6 +123,13 @@ namespace :jcg do
     puts "Battle count: #{Battle.where(tournament: tournament).count}"
   end
 
+  task update_archetypes: :environment do
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).gte(held_on: Date.new(2018, 3, 29)).pluck(:id)
+    players = Player.in(tournament_id: tournament_ids)
+    players.each(&:update_archetypes)
+  end
+
   task battle_stats: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     require 'csv'

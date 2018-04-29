@@ -13,9 +13,6 @@ Clan.delete_all
   Clan.create(id: id, name: name)
 end
 
-Archetype.delete_all
-%w[unlimited rotation].each do |format|
-  YAML.load_file(Rails.root.join("db/seeds/#{format.first}_archetypes.yml")).each do |archetype|
-    Archetype.create(archetype.merge(format: format))
-  end
-end
+Period.find_or_create_by(card_set_code: :cgs, sequence: 1, started_on: Date.new(2017, 12, 29), ended_on: Date.new(2018, 1, 29))
+Period.find_or_create_by(card_set_code: :cgs, sequence: 2, started_on: Date.new(2018, 1, 30), ended_on: Date.new(2018, 3, 28))
+Period.find_or_create_by(card_set_code: :dbn, sequence: 1, started_on: Date.new(2018, 3, 29), ended_on: Date.new(2018, 5, 29))

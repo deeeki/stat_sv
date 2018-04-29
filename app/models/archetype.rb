@@ -8,6 +8,7 @@ class Archetype
   field :conditions, type: Array
   enumerize :format, in: [:rotation, :unlimited], default: :rotation, scope: true
   belongs_to :clan
+  belongs_to :period
 
   class << self
     def detect hash_str, format = :rotation

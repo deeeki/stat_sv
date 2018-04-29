@@ -10,6 +10,10 @@ class Player
   belongs_to :tournament
   belongs_to :archetype1, class_name: 'Archetype', optional: true
   belongs_to :archetype2, class_name: 'Archetype', optional: true
+  has_many :won_matches, class_name: 'Match', inverse_of: :won_player
+  has_many :lost_matches, class_name: 'Match', inverse_of: :lost_player
+  has_many :won_battles, class_name: 'Battle', inverse_of: :won_player
+  has_many :lost_battles, class_name: 'Battle', inverse_of: :lost_player
 
   def deck_urls
     [deck_url1, deck_url2].compact

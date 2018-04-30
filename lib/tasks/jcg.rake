@@ -218,7 +218,7 @@ namespace :jcg do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     period = Period.current
     DEFAULTS = Hash[period.archetypes.with_format(format).map{|a| [a, 0] }].freeze
-    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).each do |tournament|
+    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).order(held_on: :asc).each do |tournament|
       stats = DEFAULTS.dup
       tournament.players.each do |player|
         stats[player.archetype1] += 1 if player.archetype1

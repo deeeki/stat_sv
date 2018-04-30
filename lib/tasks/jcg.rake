@@ -203,7 +203,7 @@ namespace :jcg do
         use_rate = (s[:used].to_f / players_count * 100).round(2)
         qualified_rate = (s[:qualified].to_f / s[:used] * 100).round(2)
         occupancy = (s[:qualified].to_f / qualified_count * 100).round(2)
-        csv << [archetype.name, s[:used], s[:qualified], use_rate, qualified_rate, occupancy, s[:sample_url]]
+        csv << [archetype&.name, s[:used], s[:qualified], use_rate, qualified_rate, occupancy, s[:sample_url]]
       end
     end
     suffix = ENV['TOUR'] ? ENV['TOUR'] : Date.today.strftime('%Y%m')
@@ -221,8 +221,8 @@ namespace :jcg do
     Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).each do |tournament|
       stats = DEFAULTS.dup
       tournament.players.each do |player|
-        stats[player.archetype1] += 1
-        stats[player.archetype2] += 1
+        stats[player.archetype1] += 1 if player.archetype1
+        stats[player.archetype2] += 1 if player.archetype2
       end
       stats = Hash[stats.sort_by{|_, v| - v }]
       changes[tournament] = stats

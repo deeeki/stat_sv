@@ -125,17 +125,18 @@ namespace :jcg do
 
   task update_archetypes: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).gte(held_on: Date.new(2018, 3, 29)).pluck(:id)
+    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).gte(held_on: Period.current.started_on).pluck(:id)
     players = Player.in(tournament_id: tournament_ids)
     players.each(&:update_archetypes)
   end
 
   task battle_stats: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    period = Period.current
     require 'csv'
     wins = {}
     totals = {}
-    archetypes = Archetype.with_format(format)
+    archetypes = period.archetypes.with_format(format)
     archetypes.each do |a1|
       wins[a1.name] = {}
       totals[a1.name] = {}
@@ -145,7 +146,7 @@ namespace :jcg do
       end
     end
 
-    Battle.with_format(format).gte(battled_on: Date.new(2018, 1, 24)).each do |b|
+    Battle.with_format(format).gte(battled_on: period.started_on).each do |b|
       wins[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.lost_archetype.name][b.won_archetype.name] += 1
@@ -177,7 +178,7 @@ namespace :jcg do
     stats = {}
 
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: /予選/).gte(held_on: Date.new(2018, 1, 24)).pluck(:id)
+    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: /予選/).gte(held_on: Period.current.started_on).pluck(:id)
     players = Player.in(tournament_id: tournament_ids)
     players.each do |player|
       stats[player.archetype1] ||= DEFAULTS.dup
@@ -214,8 +215,9 @@ namespace :jcg do
     totals = {}
 
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    DEFAULTS = Hash[Archetype.with_format(format).map{|a| [a, 0] }].freeze
-    Tournament.with_format(format).where(round: /予選/).gte(held_on: Date.new(2018, 1, 24)).each do |tournament|
+    period = Period.current
+    DEFAULTS = Hash[period.archetypes.with_format(format).map{|a| [a, 0] }].freeze
+    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).each do |tournament|
       stats = DEFAULTS.dup
       tournament.players.each do |player|
         stats[player.archetype1] += 1

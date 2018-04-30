@@ -147,6 +147,7 @@ namespace :jcg do
     end
 
     Battle.with_format(format).gte(battled_on: period.started_on).each do |b|
+      next if !b.won_archetype || !b.lost_archetype
       wins[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.won_archetype.name][b.lost_archetype.name] += 1
       totals[b.lost_archetype.name][b.won_archetype.name] += 1

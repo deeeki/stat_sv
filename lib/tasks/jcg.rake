@@ -170,7 +170,7 @@ namespace :jcg do
         csv << [a1, total_count, win_count, rate] + cols
       end
     end
-    File.write("battle_stats.csv", csv_str)
+    File.write("#{format}_battle_stats.csv", csv_str)
   end
 
   task qualifier_stats: :environment do
@@ -207,7 +207,8 @@ namespace :jcg do
       end
     end
     suffix = ENV['TOUR'] ? ENV['TOUR'] : Date.today.strftime('%Y%m')
-    File.write("qualifier_stats_#{suffix}.csv", csv_str)
+    format = players.first.tournament.format if ENV['TOUR']
+    File.write("#{format}_qualifier_stats_#{suffix}.csv", csv_str)
   end
 
   task usage_changes: :environment do
@@ -236,7 +237,7 @@ namespace :jcg do
         csv << [archetype.name] + tournaments.map{|t| ((changes[t][archetype] || 0).to_f / totals[t] * 100).round(2) }
       end
     end
-    File.write("usage_changes.csv", csv_str)
+    File.write("#{format}_usage_changes.csv", csv_str)
   end
 
   task dump: :environment do
@@ -249,6 +250,6 @@ namespace :jcg do
         csv << [tour_id, tournament.held_on, p.user_id, p.name, p.rank, p.archetype1&.name, p.archetype2&.name, p.deck_url1, p.deck_url2]
       end
     end
-    File.write("#{tour_id}.csv", csv_str)
+    File.write("#{tournament.format}_#{tour_id}.csv", csv_str)
   end
 end

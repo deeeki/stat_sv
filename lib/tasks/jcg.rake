@@ -1,12 +1,34 @@
+AGENT = Mechanize.new
+
+COMPE    = 'https://sv.j-cg.com/compe/'
+TOUR     = 'https://sv.j-cg.com/compe/view/tour/'
+GAMELIST = 'https://sv.j-cg.com/compe/view/gamelist/'
+MATCH    = 'https://sv.j-cg.com/compe/view/match/'
+RESULT   = 'https://sv.j-cg.com/compe/view/result/'
+
 namespace :jcg do
+  task fetch: :environment do
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+
+    compe_page = AGENT.get(COMPE + format.to_s)
+    tours = compe_page.search('tr.competition').map do |row|
+      OpenStruct.new({
+        date: row.at('td.date').text.strip,
+        url: row.at('td.name > a')['href'],
+        id: row.at('td.name > a')['href'].split('/').last,
+        status: row.at('td.status').text.strip,
+      })
+    end.reverse
+
+    tours.each do |tour|
+      next unless tour.status == '終了'
+      next if Tournament.find_by(id: tour.id)
+      ENV['TOUR'] = tour.id
+      Rake::Task['jcg:result'].execute
+    end
+  end
+
   task result: :environment do
-    TOUR     = 'https://sv.j-cg.com/compe/view/tour/'
-    GAMELIST = 'https://sv.j-cg.com/compe/view/gamelist/'
-    MATCH    = 'https://sv.j-cg.com/compe/view/match/'
-    RESULT   = 'https://sv.j-cg.com/compe/view/result/'
-
-    AGENT = Mechanize.new
-
     player_ranks = {}
     tour_id = ENV['TOUR'].scan(/\d+/).first
 

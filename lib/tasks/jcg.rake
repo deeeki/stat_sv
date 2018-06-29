@@ -234,7 +234,6 @@ namespace :jcg do
   end
 
   task usage_changes: :environment do
-    require 'csv'
     changes = {}
     totals = {}
 
@@ -253,13 +252,12 @@ namespace :jcg do
     end
 
     tournaments = changes.keys
-    csv_str = CSV.generate do |csv|
-      csv << ['デッキタイプ'] + tournaments.map(&:held_on)
-      changes.values.last.each do |archetype, count|
-        csv << [archetype.name] + tournaments.map{|t| ((changes[t][archetype] || 0).to_f / totals[t] * 100).round(2) }
-      end
+    rows = [['デッキタイプ'] + tournaments.map(&:held_on)]
+    changes.values.last.each do |archetype, count|
+      rows << [archetype.name] + tournaments.map{|t| ((changes[t][archetype] || 0).to_f / totals[t] * 100).round(2) }
     end
-    File.write("#{format}_usage_changes.csv", csv_str)
+
+    Writer.google_drive('JCG_Usage', rows)
   end
 
   task dump: :environment do
@@ -285,11 +283,6 @@ namespace :jcg do
       end
     end
 
-    session = GoogleDrive::Session.from_service_account_key('config/service_account.json')
-    ws = session.spreadsheet_by_key(ENV['SPREADSHEET_KEY']).worksheet_by_title('JCG_Final')
-
-    ws.delete_rows(1, ws.num_rows)
-    ws.update_cells(1, 1, rows)
-    ws.save
+    Writer.google_drive('JCG_Final', rows)
   end
 end

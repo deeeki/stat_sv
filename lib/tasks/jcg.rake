@@ -196,7 +196,6 @@ namespace :jcg do
   end
 
   task qualifier_stats: :environment do
-    require 'csv'
     DEFAULTS = { used: 0, qualified: 0, sample_url: nil }.freeze
     stats = {}
 
@@ -219,18 +218,16 @@ namespace :jcg do
     qualified_count = players.where(rank: 1).count
     stats = Hash[stats.sort_by{|_, v| - v[:used] }]
 
-    csv_str = CSV.generate do |csv|
-      csv << %w[デッキタイプ 使用者 予選突破者 使用率 予選突破率 予選突破使用率 デッキ例]
-      stats.each do |archetype, s|
-        use_rate = (s[:used].to_f / players_count * 100).round(2)
-        qualified_rate = (s[:qualified].to_f / s[:used] * 100).round(2)
-        occupancy = (s[:qualified].to_f / qualified_count * 100).round(2)
-        csv << [archetype&.name, s[:used], s[:qualified], use_rate, qualified_rate, occupancy, s[:sample_url]]
-      end
+    rows = [%w[デッキタイプ 使用者 予選突破者 使用率 予選突破率 予選突破使用率 デッキ例]]
+    stats.each do |archetype, s|
+      use_rate = (s[:used].to_f / players_count * 100).round(2)
+      qualified_rate = (s[:qualified].to_f / s[:used] * 100).round(2)
+      occupancy = (s[:qualified].to_f / qualified_count * 100).round(2)
+      rows << [archetype&.name, s[:used], s[:qualified], use_rate, qualified_rate, occupancy, s[:sample_url]]
     end
-    suffix = ENV['TOUR'] ? ENV['TOUR'] : Date.today.strftime('%Y%m')
-    format = players.first.tournament.format if ENV['TOUR']
-    File.write("#{format}_qualifier_stats_#{suffix}.csv", csv_str)
+
+    ws_name = ENV['TOUR'] ? ENV['TOUR'] : Date.today.strftime('%Y%m')
+    Writer.google_drive(ws_name, rows)
   end
 
   task usage_changes: :environment do

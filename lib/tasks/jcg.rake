@@ -149,6 +149,7 @@ namespace :jcg do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).gte(held_on: Period.current.started_on).pluck(:id)
     players = Player.in(tournament_id: tournament_ids)
+    players = players.where(archetype1: nil, archetype2: nil) unless ENV['FORCE']
     players.each(&:update_archetypes)
   end
 

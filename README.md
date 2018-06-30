@@ -1,24 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## When a new card set released
 
-Things you may want to cover:
+* Refresh all card data
 
-* Ruby version
+```sh
+rake portal:cards:setup
+```
 
-* System dependencies
+* Add card set code
 
-* Configuration
+Add a new card set code to `app/models/period.rb`
 
-* Database creation
 
-* Database initialization
+## When card-balance changed
 
-* How to run the test suite
+* Add a new period
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+# Modify db/seeds.rb beforehand
+rake db:seed
+```
 
-* Deployment instructions
+* Define archetype conditions for current period
 
-* ...
+Save to `config/archetypes/{CARD_SET_CODE}_{FORMAT}_{PERIOD_START_DATE}.yml`
+
+* Create archetypes
+
+```sh
+rake maintenance:archetype
+```

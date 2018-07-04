@@ -9,5 +9,10 @@ class Writer
       ws.update_cells(1, 1, data)
       ws.save
     end
+
+    def csv file_path, data
+      require 'csv'
+      File.write(file_path, data.map(&:to_csv).join)
+    end
   end
 end

@@ -7,7 +7,7 @@ class Tournament
   field :held_on, type: Date
   field :round, type: String
   enumerize :format, in: [:rotation, :unlimited], default: :rotation, scope: true
-  has_many :players, dependent: :delete
-  has_many :matches, dependent: :delete
-  has_many :battles, dependent: :delete
+  has_many :players, dependent: :delete_all
+  has_many :matches, dependent: :delete_all
+  has_many :battles, dependent: :delete_all
 end

@@ -156,7 +156,7 @@ namespace :jcg do
   task battle_stats: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     period = Period.current
-    require 'csv'
+
     wins = {}
     totals = {}
     archetypes = period.archetypes.with_format(format)
@@ -177,23 +177,22 @@ namespace :jcg do
     end
     sorted_archetypes = totals.sort{|(k1, v1), (k2, v2)| v2.values.sum <=> v1.values.sum }.map{|k, v| k }
 
-    csv_str = CSV.generate do |csv|
-      csv << [nil, '試合数', '勝利数', '勝率'] + sorted_archetypes
-      sorted_archetypes.each do |a1|
-        cols = []
-        sorted_archetypes.each do |a2|
-          win = wins[a1][a2]
-          total = totals[a1][a2]
-          rate = total.zero? ? 'N/A' : (win.to_f / total).round(2) * 100
-          cols << rate
-        end
-        total_count = totals[a1].values.sum
-        win_count = wins[a1].values.sum
-        rate = total_count.zero? ? 'N/A' : (win_count.to_f / total_count).round(2) * 100
-        csv << [a1, total_count, win_count, rate] + cols
+    rows = [[nil, '試合数', '勝利数', '勝率'] + sorted_archetypes]
+    sorted_archetypes.each do |a1|
+      cols = []
+      sorted_archetypes.each do |a2|
+        win = wins[a1][a2]
+        total = totals[a1][a2]
+        rate = total.zero? ? 'N/A' : (win.to_f / total).round(2) * 100
+        cols << rate
       end
+      total_count = totals[a1].values.sum
+      win_count = wins[a1].values.sum
+      rate = total_count.zero? ? 'N/A' : (win_count.to_f / total_count).round(2) * 100
+      rows << [a1, total_count, win_count, rate] + cols
     end
-    File.write("#{format}_battle_stats.csv", csv_str)
+
+    Writer.google_drive('JCG_Battle', rows)
   end
 
   task qualifier_stats: :environment do

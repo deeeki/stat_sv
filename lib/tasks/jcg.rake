@@ -113,7 +113,7 @@ namespace :jcg do
               next
             end
 
-            won_player_clans = { won_player_name => won_clan_name }
+            won_player_clans[won_player_name] = won_clan_name
 
             if i.zero?
               next # Can't detect 1st battle's lost clan/archetype

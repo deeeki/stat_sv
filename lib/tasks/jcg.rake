@@ -103,41 +103,39 @@ namespace :jcg do
         end
 
         games = page.search('ul.game_list > li')
-        if games.count == 3
-          won_player_clans = {}
-          games.each_with_index do |game, i|
-            won_player_name = game.search('span')[2]&.text&.strip
-            won_clan_name = game.search('span')[3]&.text&.strip
-            if !won_player_name || !won_clan_name
-              puts match_url
-              next
-            end
+        next unless games.count == 3 # Can't detect anything if straight wins
 
-            won_player_clans[won_player_name] = won_clan_name
-
-            if i.zero?
-              next # Can't detect 1st battle's lost clan/archetype
-            else
-              won_player = players.find{|p| p.name == won_player_name }
-              lost_player = players.find{|p| p.name != won_player_name }
-              won_clan = won_player.clans.find{|c| c.name == won_clan_name }
-              lost_clan = lost_player.clans.find{|c| c.name != won_player_clans[lost_player.name] }
-
-              next if !won_clan || !lost_clan
-
-              Battle.find_or_create_by(
-                tournament: tournament,
-                format: format,
-                match: match,
-                battled_on: tournament.held_on,
-                number: i + 1,
-                won_player: won_player,
-                lost_player: lost_player,
-                won_clan: won_clan,
-                lost_clan: lost_clan
-              )
-            end
+        won_player_clans = {}
+        games.each_with_index do |game, i|
+          won_player_name = game.search('span')[2]&.text&.strip
+          won_clan_name = game.search('span')[3]&.text&.strip
+          if !won_player_name || !won_clan_name
+            puts match_url
+            next
           end
+
+          won_player_clans[won_player_name] = won_clan_name
+
+          next if i.zero? # Can't detect 1st battle's lost clan/archetype
+
+          won_player = players.find{|p| p.name == won_player_name }
+          lost_player = players.find{|p| p.name != won_player_name }
+          won_clan = won_player.clans.find{|c| c.name == won_clan_name }
+          lost_clan = lost_player.clans.find{|c| c.name != won_player_clans[lost_player.name] }
+
+          next if !won_clan || !lost_clan
+
+          Battle.find_or_create_by(
+            tournament: tournament,
+            format: format,
+            match: match,
+            battled_on: tournament.held_on,
+            number: i + 1,
+            won_player: won_player,
+            lost_player: lost_player,
+            won_clan: won_clan,
+            lost_clan: lost_clan
+          )
         end
       end
     end

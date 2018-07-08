@@ -190,7 +190,7 @@ namespace :jcg do
       rows << [a1, total_count, win_count, rate] + cols
     end
 
-    Writer.google_drive('JCG_Battle', rows)
+    Writer.google_drive("#{format.to_s.first}Battle", rows)
   end
 
   task qualifier_stats: :environment do
@@ -252,7 +252,7 @@ namespace :jcg do
       rows << [archetype.name] + tournaments.map{|t| ((changes[t][archetype] || 0).to_f / totals[t] * 100).round(2) }
     end
 
-    Writer.google_drive('JCG_Usage', rows)
+    Writer.google_drive("#{format.to_s.first}Usage", rows)
   end
 
   task dump_final: :environment do

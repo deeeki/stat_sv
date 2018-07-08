@@ -255,29 +255,14 @@ namespace :jcg do
     Writer.google_drive('JCG_Usage', rows)
   end
 
-  task dump: :environment do
-    require 'csv'
-    tour_id = ENV['TOUR'].scan(/\d+/).first
-    tournament = Tournament.find(tour_id)
-    csv_str = CSV.generate do |csv|
-      csv << %w[大会ID 日付 ユーザーID 名前 順位 デッキタイプ1 デッキタイプ2 デッキURL1 デッキURL2]
-      tournament.players.sort_by{|p| p.rank || 5 }.each do |p|
-        csv << [tour_id, tournament.held_on, p.user_id, p.name, p.rank, p.archetype1&.name, p.archetype2&.name, p.deck_url1, p.deck_url2]
-      end
-    end
-    File.write("#{tournament.format}_#{tour_id}.csv", csv_str)
-  end
-
-  task dump_gd: :environment do
-    rows = [%w[大会ID 日付 ユーザーID 名前 順位 デッキタイプ1 デッキタイプ2 デッキURL1 デッキURL2]]
+  task dump_final: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     period = Period.current
+    rows = [%w[大会ID 日付 ユーザーID ユーザー名 順位 デッキタイプ1 デッキタイプ2 デッキURL1 デッキURL2]]
     Tournament.with_format(format).where(round: /決勝/).gte(held_on: period.started_on).order(held_on: :desc).each do |tournament|
-      tournament.players.sort_by{|p| p.rank || 5 }.each do |p|
-        rows << [tournament.id, tournament.held_on, p.user_id, p.name, p.rank, p.archetype1&.name, p.archetype2&.name, p.deck_url1, p.deck_url2]
-      end
+      rows += tournament.dump
     end
 
-    Writer.google_drive('JCG_Final', rows)
+    Writer.google_drive("#{format.to_s.first}Final", rows)
   end
 end

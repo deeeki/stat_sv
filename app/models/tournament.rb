@@ -16,4 +16,15 @@ class Tournament
       [id, held_on, p.user_id, p.name, p.rank, p.archetype1&.name, p.archetype2&.name, p.deck_url1, p.deck_url2]
     end
   end
+
+  def usage
+    period = Period.lte(started_on: held_on).order(started_on: :desc).first
+    counts = Hash[period.archetypes.with_format(format).map{|a| [a.name, 0] }]
+    players.each do |player|
+      counts[player.archetype1.name] += 1 if player.archetype1
+      counts[player.archetype2.name] += 1 if player.archetype2
+    end
+    total = players.count
+    Hash[counts.sort_by{|_, v| -v }.map{|name, count| [name, (count.to_f / total * 100).round(2)] }]
+  end
 end

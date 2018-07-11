@@ -265,4 +265,22 @@ namespace :jcg do
 
     Writer.google_drive("#{format.to_s.first}Final", rows)
   end
+
+  task winrate: :environment do
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    tournament = Tournament.with_format(format).where(round: /予選/).order(held_on: :desc).first
+    top_usage = tournament.usage.take(10).to_h
+    archetype_names = top_usage.keys
+    stats = Battle.stats(format: format)
+
+    rows = [['デッキタイプ', '使用率込勝率'] + top_usage.keys]
+    rows << ['使用率', '=SUM(C2:L2)'] + top_usage.values
+    archetype_names.each.with_index(3) do |archetype_name, i|
+      part = ('C'..'L').map{|col| "#{col}#{i}*#{col}$2" }.join('+')
+      formula = "=ROUND((#{part})/B$2,1)"
+      rows << [archetype_name, formula] + archetype_names.map{|n| stats.rates[archetype_name][n] }
+    end
+
+    Writer.google_drive("#{format.to_s.first}Winrate", rows)
+  end
 end

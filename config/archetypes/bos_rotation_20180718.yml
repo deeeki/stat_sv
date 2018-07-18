@@ -1,0 +1,309 @@
+---
+- clan_id: 1
+  name: フェアドラE
+  detection_order: 1
+  conditions:
+  - 6H5CS: 3 # フェアリードラゴン
+- clan_id: 1
+  name: ニュートE
+  detection_order: 2
+  conditions:
+  - 6GgLs: 2 # ヘクトル
+  - 6H5CI: 3 # BB
+    6H3Uw: 3 # 双撃
+- clan_id: 1
+  name: アグロE
+  detection_order: 3
+  conditions:
+  - 6Ko0s: 2 # イピリア
+    6KrBg: 2 # 妖精の調べ
+  - 6WERs: 2 # マイコニド
+    6KrBg: 2 # 妖精の調べ
+  - 5zWm2: 2 # ゴブリン
+    6H2mC: 3 # 使役者
+  - 5zWm2: 3 # ゴブリン
+    6H2mC: 2 # 使役者
+  - 5zWm2: 2 # ゴブリン
+    6SXdc: 3 # 翠嵐
+- clan_id: 1
+  name: コンE
+  detection_order: 4
+  conditions:
+  - 6Ksv2: 3 # ヴィーナス
+  - 6Ksv2: 2 # ヴィーナス
+    6KvLS: 1 # キングエレファント
+  - 6KWwo: 1 # ロキ
+    6KvLS: 1 # キングエレファント
+- clan_id: 1
+  name: ミッドE
+  detection_order: 5
+  conditions:
+  - 6KvLI: 2 # カシオペア
+  - 6SXdI: 2 # ユグドラシル
+  - 6SXdc: 2 # 翠嵐
+  - 6WLmI: 2 # コルワ
+- clan_id: 2
+  name: スパルタクスR
+  detection_order: 1
+  conditions:
+  - 6Sw26: 3 # スパルタクス
+- clan_id: 2
+  name: アグロR
+  detection_order: 2
+  conditions:
+  - 6LG2Q: 1 # 円卓会議
+    6HMI2: 2 # マスタークノイチ
+  - 6Wcs2: 2 # ターニャ
+    6HMI2: 2 # マスタークノイチ
+  - 5-Hb2: 3 # クイブレ
+    6LFJi: 3 # ペルセウス
+- clan_id: 2
+  name: コンR
+  detection_order: 3
+  conditions:
+  - 6DfTo: 2 # ローラン
+  - 6DfTo: 1 # ローラン
+    6P5uo: 1 # メリッサ
+- clan_id: 2
+  name: ミッドR
+  detection_order: 5
+  conditions:
+  - 6P5uy: 3 # アーサー
+  - 6Sw1y: 3 # スカイフォートレス
+  - 6WiTQ: 3 # ドラゴンナイツ
+- clan_id: 3
+  name: 召喚士W
+  detection_order: 1
+  conditions:
+  - 6X1io: 3 # 暗黒の召喚士
+- clan_id: 3
+  name: 白銀剣W
+  detection_order: 2
+  conditions:
+  - 6PUJS: 2 # 白銀剣のゴーレム
+- clan_id: 3
+  name: ニュートW
+  detection_order: 3
+  conditions:
+  - 6HkiY: 3 # スイーツウィッチ
+  - 6GgLs: 3 # ヘクトル
+  - 6Hpb2: 3 # プリス
+- clan_id: 3
+  name: マナリアW
+  detection_order: 4
+  conditions:
+  - 6PUJI: 3 # マナリア
+    6TDZy: 3 # 竜術士
+  - 6PUJI: 3 # マナリア
+    6TBsQ: 3 # ストームレイジ
+- clan_id: 3
+  name: スペルW
+  detection_order: 5
+  conditions:
+  - 6LgAS: 2 # ギガントキマイラ
+  - 6TISS: 2 # 無貌の魔女
+  - 5-iRo: 2 # フレイムデストロイヤー
+  - 6X6bS: 2 # 絶望のキマイラ
+- clan_id: 3
+  name: 秘術W
+  detection_order: 6
+  conditions:
+  - 6PPgQ: 2 # 静寂
+    6HpbC: 2 # レヴィ
+  - 6LbI6: 3 # フロウ
+    6HpbC: 2 # レヴィ
+- clan_id: 4
+  name: リントD
+  detection_order: 1
+  conditions:
+  - 6Tgsy: 3 # リントヴルム
+  - 6Tgsy: 2 # リントヴルム
+    6XU_o: 1 # ゾーイ
+- clan_id: 4
+  name: ギルヴァD
+  detection_order: 2
+  conditions:
+  - 6Tgso: 2 # ギルヴァ
+- clan_id: 4
+  name: ジャバD
+  detection_order: 3
+  conditions:
+  - 6IERy: 3 # ジャバウォック
+  - 6IERy: 2 # ジャバウォック
+    6XU_o: 2 # ゾーイ
+- clan_id: 4
+  name: 原初D
+  detection_order: 4
+  conditions:
+  - 6M2ao: 3 # 原初
+- clan_id: 4
+  name: クロノスD
+  detection_order: 5
+  conditions:
+  - 6OL3o: 2 # クロノス
+- clan_id: 4
+  name: フェイスD
+  detection_order: 6
+  conditions:
+  - 5zWm2: 3 # ゴブリン
+- clan_id: 4
+  name: 無謀D
+  detection_order: 7
+  conditions:
+  - 6ICFA: 2 # 無謀なる戦
+- clan_id: 4
+  name: ランプD
+  detection_order: 8
+  conditions:
+  - 6XSZY: 3 # スカーサハ
+  - 6L-BY: 2 # 峡谷
+  - 6PqHi: 2 # 狂えるドレイク
+  - 6XSZi: 2 # 炎竜
+    6Tb-S: 2 # ガルア
+- clan_id: 5
+  name: アーカスNc
+  detection_order: 1
+  conditions:
+  - 6U3Hc: 2 # アーカス
+- clan_id: 5
+  name: ダリスNc
+  detection_order: 2
+  conditions:
+  - 6IcsI: 2 # ダークアリス
+- clan_id: 5
+  name: リアニNc
+  detection_order: 3
+  conditions:
+  - 6XtQS: 2 # モルディカイ
+- clan_id: 5
+  name: 最果てNc
+  detection_order: 4
+  conditions:
+  - 6U3HS: 3 # 最果ての骸
+- clan_id: 5
+  name: ミッドNc
+  detection_order: 5
+  conditions:
+  - 6QF8I: 2 # アイシャ
+- clan_id: 6
+  name: プルソンV
+  detection_order: 1
+  conditions:
+  - 6YFqy: 3 # プルソン
+  - 6YFqy: 2 # プルソン
+    6I_Gy: 2 # 昏き
+- clan_id: 6
+  name: ヨルムンV
+  detection_order: 2
+  conditions:
+  - 6MkXc: 2 # デビルシープ
+    6MpPy: 2 # ヨルムンガンド
+- clan_id: 6
+  name: アグロV
+  detection_order: 3
+  conditions:
+  - 5zWm2: 2 # ゴブリン
+    5_pFW: 2 # インプランサー
+  - 5zWm2: 2 # ゴブリン
+    6I_Go: 2 # カラボス
+- clan_id: 6
+  name: 闇蝙蝠V
+  detection_order: 4
+  conditions:
+  - 6URhy: 2 # 闇喰らいの蝙蝠
+- clan_id: 6
+  name: 血統V
+  detection_order: 5
+  conditions:
+  - 6UPFY: 2 # 血統の王
+    6Y8W2: 3 # 麗しのサキュバス
+  - 6UPFY: 3 # 血統の王
+    6UPFi: 3 # ヴァーニア
+- clan_id: 6
+  name: ニュートV
+  detection_order: 6
+  conditions:
+  - 6GgLs: 3 # ヘクトル
+  - 6OIdY: 3 # ベルエンジェル
+    6Iyqi: 3 # ファントムキャット
+- clan_id: 6
+  name: コンV
+  detection_order: 7
+  conditions:
+  - 5_rhS: 2 # ワードローブレイダー
+    6IyqY: 2 # エメラダ
+  - 6QbrQ: 3 # 大悪魔の腕
+    6IyqY: 2 # エメラダ
+  - 6IwOc: 2 # バンダースナッチ
+- clan_id: 6
+  name: 復讐V
+  detection_order: 8
+  conditions:
+  - 6YDOi: 2 # ナルメア
+    6F6Fm: 2 # カオスシップ
+  - 6YDOi: 2 # ナルメア
+    5_pFg: 2 # ダークジェネラル
+  - 6URi6: 3 # ヴァルツ
+    6F6Fm: 2 # カオスシップ
+  - 6URi6: 3 # ヴァルツ
+    5_pFg: 2 # ダークジェネラル
+- clan_id: 7
+  name: 邪教B
+  detection_order: 1
+  conditions:
+  - 6NBqS: 3 # 邪教の権化
+- clan_id: 7
+  name: 天狐B
+  detection_order: 2
+  conditions:
+  - 6Unvg: 3 # 天狐の社
+  - 6Unvg: 2 # 天狐の社
+    6YeFI: 1 # レ・フィーエ
+- clan_id: 7
+  name: 聖獅子B
+  detection_order: 3
+  conditions:
+  - 6UjWQ: 3 # 聖獅子の結晶
+- clan_id: 7
+  name: ニュートB
+  detection_order: 4
+  conditions:
+  - 6JNhS: 2 # 黄金郷の獅子
+- clan_id: 7
+  name: 教会B
+  detection_order: 5
+  conditions:
+  - 6Qzmg: 2 # 頂きの教会
+    6Q_zS: 2 # ヘヴンリーナイト
+- clan_id: 7
+  name: アミュB
+  detection_order: 7
+  conditions:
+  - 6Uq6S: 3 # ケリュネイア
+  - 6YeFS: 3 # ガルラ
+- clan_id: 8
+  name: AFNm
+  detection_order: 1
+  conditions:
+  - 6ROO6: 3 # デウスエクスマキナ
+  - 6RHYc: 3 # 加速装置
+  - 6ROO6: 2 # デウスエクスマキナ
+    6RHYc: 1 # 加速装置
+- clan_id: 8
+  name: 人形Nm
+  detection_order: 2
+  conditions:
+  - 6RJW4: 3 # ノア
+  - 6VCWo: 2 # オーキス
+    6RJW4: 2 # ノア
+- clan_id: 8
+  name: アグロNm
+  detection_order: 3
+  conditions:
+  - 5zWm2: 3 # ゴブリン
+    6Z0fo: 3 # シルヴァ
+- clan_id: 8
+  name: ミッドNm
+  detection_order: 4
+  conditions:
+  - 6RONy: 3 # スピネ

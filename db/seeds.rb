@@ -20,3 +20,4 @@ Period.find_or_create_by(card_set_code: :dbn, sequence: 2, started_on: Date.new(
 Period.find_or_create_by(card_set_code: :bos, sequence: 1, started_on: Date.new(2018, 6, 28), ended_on: Date.new(2018, 7, 17))
 Period.find_or_create_by(card_set_code: :bos, sequence: 2, started_on: Date.new(2018, 7, 18), ended_on: Date.new(2018, 8, 20))
 Period.find_or_create_by(card_set_code: :bos, sequence: 3, started_on: Date.new(2018, 8, 21), ended_on: Date.new(2018, 9, 26))
+Period.find_or_create_by(card_set_code: :oot, sequence: 1, started_on: Date.new(2018, 9, 27), ended_on: Date.new(2018, 11, 26))

@@ -23,7 +23,9 @@ class Archetype
 
   def match? deck
     conditions.each do |condition|
-      return true if condition.map{|card_code, count| deck[card_code] && deck[card_code] >= count }.all?
+      return true if condition.map{|card_code, count|
+        count.zero? ? !deck[card_code] : deck[card_code] && deck[card_code] >= count
+      }.all?
     end
     false
   end

@@ -11,6 +11,10 @@ class Tournament
   has_many :matches, dependent: :delete_all
   has_many :battles, dependent: :delete_all
 
+  def period
+    @period ||= Period.lte(started_on: held_on).order(started_on: :desc).first
+  end
+
   def dump
     players.sort_by{|p| p.rank || 5 }.map do |p|
       [id, held_on, p.user_id, p.name, p.rank, p.archetype1&.name, p.archetype2&.name, p.deck_url1, p.deck_url2]
@@ -18,7 +22,6 @@ class Tournament
   end
 
   def usage
-    period = Period.lte(started_on: held_on).order(started_on: :desc).first
     counts = Hash[period.archetypes.with_format(format).map{|a| [a.name, 0] }]
     players.each do |player|
       counts[player.archetype1.name] += 1 if player.archetype1

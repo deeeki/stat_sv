@@ -32,7 +32,7 @@ class Player
   end
 
   def update_archetypes
-    self.archetype1, self.archetype2 = deck_urls.map{|url| Archetype.detect(url, tournament.format) }.compact
+    self.archetype1, self.archetype2 = deck_urls.map{|url| Archetype.detect(url, tournament.format, tournament.period) }.compact
     update
     won_battles.each{|b| b.update(won_archetype: archetypes.find{|a| a.clan_id == b.won_clan_id }) }
     lost_battles.each{|b| b.update(lost_archetype: archetypes.find{|a| a.clan_id == b.lost_clan_id }) }

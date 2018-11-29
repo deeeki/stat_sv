@@ -255,6 +255,38 @@ namespace :jcg do
     Writer.google_drive("#{format.to_s.first}Usage", rows)
   end
 
+  task combi: :environment do
+    changes = {}
+    totals = {}
+
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    period = Period.current
+    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).order(held_on: :asc).each do |tournament|
+      stats = {}
+      skipped_count = 0
+      tournament.players.each do |player|
+        if !player.archetype1 || !player.archetype2
+          skipped_count += 1
+          next
+        end
+        combi = [player.archetype1.name, player.archetype2.name].join(' | ')
+        stats[combi] ||= 0
+        stats[combi] += 1
+      end
+      stats = Hash[stats.sort_by{|_, v| - v }]
+      changes[tournament] = stats
+      totals[tournament] = tournament.players.count - skipped_count
+    end
+
+    tournaments = changes.keys
+    rows = [[''] + tournaments.map(&:held_on)]
+    changes.values.last.keys.each do |combi|
+      rows << [combi] + tournaments.map{|t| ((changes[t][combi] || 0).to_f / totals[t] * 100).round(2) }
+    end
+
+    Writer.google_drive("#{format.to_s.first}Combi", rows)
+  end
+
   task dump_final: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     period = Period.current

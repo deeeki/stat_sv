@@ -102,6 +102,8 @@ namespace :jcg do
           )
         end
 
+        next unless players.map(&:name).uniq.count == 2 # Ignore the same name
+
         games = page.search('ul.game_list > li')
         next unless games.count == 3 # Can't detect anything if straight wins
 

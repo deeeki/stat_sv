@@ -153,49 +153,6 @@ namespace :jcg do
     players.each(&:update_archetypes)
   end
 
-  task battle_stats: :environment do
-    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    period = Period.current
-
-    wins = {}
-    totals = {}
-    archetypes = period.archetypes.with_format(format)
-    archetypes.each do |a1|
-      wins[a1.name] = {}
-      totals[a1.name] = {}
-      archetypes.each do |a2|
-        wins[a1.name][a2.name] = 0
-        totals[a1.name][a2.name] = 0
-      end
-    end
-
-    Battle.with_format(format).gte(battled_on: period.started_on).each do |b|
-      next if !b.won_archetype || !b.lost_archetype
-      wins[b.won_archetype.name][b.lost_archetype.name] += 1
-      totals[b.won_archetype.name][b.lost_archetype.name] += 1
-      totals[b.lost_archetype.name][b.won_archetype.name] += 1
-    end
-    sorted_archetypes = totals.sort{|(k1, v1), (k2, v2)| v2.values.sum <=> v1.values.sum }.map{|k, v| k }
-
-    header = ['', '試合数', '勝利数', '勝率'] + sorted_archetypes
-    rows = [header.map{|c| c.split('').join("\n") }]
-    sorted_archetypes.each do |a1|
-      cols = []
-      sorted_archetypes.each do |a2|
-        win = wins[a1][a2]
-        total = totals[a1][a2]
-        rate = total.zero? ? 'N/A' : (win.to_f / total).round(2) * 100
-        cols << rate
-      end
-      total_count = totals[a1].values.sum
-      win_count = wins[a1].values.sum
-      rate = total_count.zero? ? 'N/A' : (win_count.to_f / total_count).round(2) * 100
-      rows << [a1, total_count, win_count, rate] + cols
-    end
-
-    Writer.google_drive("#{format.to_s.first}Battle", rows)
-  end
-
   task qualifier_stats: :environment do
     DEFAULTS = { used: 0, qualified: 0, sample_url: nil }.freeze
     stats = {}
@@ -301,8 +258,28 @@ namespace :jcg do
     Writer.google_drive("#{format.to_s.first}Final", rows)
   end
 
+  task battle: :environment do
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+
+    stats = Battle.stats(format: format)
+    sorted_archetypes = stats.battles.sort{|(k1, v1), (k2, v2)| v2.values.sum <=> v1.values.sum }.map{|k, v| k }
+
+    header = ['', '試合数', '勝利数', '勝率'] + sorted_archetypes
+    rows = [header.map{|c| c.split('').join("\n") }]
+    sorted_archetypes.each do |a1|
+      archetype_cols = sorted_archetypes.map{|a2| stats.formula_rates[a1][a2] }
+      battles_count = stats.battles[a1].values.sum
+      wins_count = stats.wins[a1].values.sum
+      total_rate = battles_count.zero? ? 'N/A' : (wins_count.to_f / battles_count * 100).round(2)
+      rows << [a1, battles_count, wins_count, total_rate] + archetype_cols
+    end
+
+    Writer.google_drive("#{format.to_s.first}Battle", rows)
+  end
+
   task winrate: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+
     tournament = Tournament.with_format(format).where(round: /予選/).order(held_on: :desc).first
     top_usage = tournament.usage.take(10).to_h
     archetype_names = top_usage.keys
@@ -314,7 +291,7 @@ namespace :jcg do
     archetype_names.each.with_index(3) do |archetype_name, i|
       part = ('C'..'L').map{|col| "#{col}#{i}*#{col}$2" }.join('+')
       formula = "=ROUND((#{part})/B$2,1)"
-      rows << [archetype_name, formula] + archetype_names.map{|n| stats.rates[archetype_name][n] }
+      rows << [archetype_name, formula] + archetype_names.map{|n| stats.formula_rates[archetype_name][n] }
     end
 
     Writer.google_drive("#{format.to_s.first}Winrate", rows)

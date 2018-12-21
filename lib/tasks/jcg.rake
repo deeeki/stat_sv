@@ -177,7 +177,8 @@ namespace :jcg do
     end
     sorted_archetypes = totals.sort{|(k1, v1), (k2, v2)| v2.values.sum <=> v1.values.sum }.map{|k, v| k }
 
-    rows = [[nil, '試合数', '勝利数', '勝率'] + sorted_archetypes]
+    header = ['', '試合数', '勝利数', '勝率'] + sorted_archetypes
+    rows = [header.map{|c| c.split('').join("\n") }]
     sorted_archetypes.each do |a1|
       cols = []
       sorted_archetypes.each do |a2|
@@ -307,8 +308,9 @@ namespace :jcg do
     archetype_names = top_usage.keys
     stats = Battle.stats(format: format)
 
-    rows = [['デッキタイプ', '使用率込勝率'] + top_usage.keys]
-    rows << ['使用率', '=SUM(C2:L2)'] + top_usage.values
+    header = ['', '使用率込勝率'] + top_usage.keys
+    rows = [header.map{|c| c.split('').join("\n") }]
+    rows << ['(使用率)', '=SUM(C2:L2)'] + top_usage.values
     archetype_names.each.with_index(3) do |archetype_name, i|
       part = ('C'..'L').map{|col| "#{col}#{i}*#{col}$2" }.join('+')
       formula = "=ROUND((#{part})/B$2,1)"

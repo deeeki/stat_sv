@@ -153,7 +153,66 @@ namespace :jcg do
     players.each(&:update_archetypes)
   end
 
-  task qualifier_stats: :environment do
+  task usage: :environment do
+    changes = {}
+    totals = {}
+
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    period = Period.current
+    DEFAULTS = Hash[period.archetypes.with_format(format).map{|a| [a, 0] }].freeze
+    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).order(held_on: :asc).each do |tournament|
+      stats = DEFAULTS.dup
+      tournament.players.each do |player|
+        stats[player.archetype1] += 1 if player.archetype1
+        stats[player.archetype2] += 1 if player.archetype2
+      end
+      stats = Hash[stats.sort_by{|_, v| - v }]
+      changes[tournament] = stats
+      totals[tournament] = tournament.players.count
+    end
+
+    tournaments = changes.keys
+    rows = [['デッキタイプ'] + tournaments.map(&:held_on)]
+    changes.values.last.each do |archetype, count|
+      rows << [archetype.name] + tournaments.map{|t| ((changes[t][archetype] || 0).to_f / totals[t] * 100).round(2) }
+    end
+
+    Writer.google_drive("#{format.to_s.first}Usage", rows)
+  end
+
+  task usage_combi: :environment do
+    changes = {}
+    totals = {}
+
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    period = Period.current
+    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).order(held_on: :asc).each do |tournament|
+      stats = {}
+      skipped_count = 0
+      tournament.players.each do |player|
+        if !player.archetype1 || !player.archetype2
+          skipped_count += 1
+          next
+        end
+        combi = [player.archetype1.name, player.archetype2.name].join(' | ')
+        stats[combi] ||= 0
+        stats[combi] += 1
+      end
+      stats = Hash[stats.sort_by{|_, v| - v }]
+      changes[tournament] = stats
+      totals[tournament] = tournament.players.count - skipped_count
+    end
+
+    tournaments = changes.keys
+    rows = [[''] + tournaments.map(&:held_on)]
+    changes.values.last.keys.each do |combi|
+      rows << [combi] + tournaments.map{|t| ((changes[t][combi] || 0).to_f / totals[t] * 100).round(2) }
+    end
+
+    Writer.google_drive("#{format.to_s.first}Combi", rows)
+  end
+
+  task qualifier: :environment do
     DEFAULTS = { used: 0, qualified: 0, sample_url: nil }.freeze
     stats = {}
 
@@ -188,66 +247,7 @@ namespace :jcg do
     Writer.google_drive(ws_name, rows)
   end
 
-  task usage_changes: :environment do
-    changes = {}
-    totals = {}
-
-    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    period = Period.current
-    DEFAULTS = Hash[period.archetypes.with_format(format).map{|a| [a, 0] }].freeze
-    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).order(held_on: :asc).each do |tournament|
-      stats = DEFAULTS.dup
-      tournament.players.each do |player|
-        stats[player.archetype1] += 1 if player.archetype1
-        stats[player.archetype2] += 1 if player.archetype2
-      end
-      stats = Hash[stats.sort_by{|_, v| - v }]
-      changes[tournament] = stats
-      totals[tournament] = tournament.players.count
-    end
-
-    tournaments = changes.keys
-    rows = [['デッキタイプ'] + tournaments.map(&:held_on)]
-    changes.values.last.each do |archetype, count|
-      rows << [archetype.name] + tournaments.map{|t| ((changes[t][archetype] || 0).to_f / totals[t] * 100).round(2) }
-    end
-
-    Writer.google_drive("#{format.to_s.first}Usage", rows)
-  end
-
-  task combi: :environment do
-    changes = {}
-    totals = {}
-
-    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    period = Period.current
-    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).order(held_on: :asc).each do |tournament|
-      stats = {}
-      skipped_count = 0
-      tournament.players.each do |player|
-        if !player.archetype1 || !player.archetype2
-          skipped_count += 1
-          next
-        end
-        combi = [player.archetype1.name, player.archetype2.name].join(' | ')
-        stats[combi] ||= 0
-        stats[combi] += 1
-      end
-      stats = Hash[stats.sort_by{|_, v| - v }]
-      changes[tournament] = stats
-      totals[tournament] = tournament.players.count - skipped_count
-    end
-
-    tournaments = changes.keys
-    rows = [[''] + tournaments.map(&:held_on)]
-    changes.values.last.keys.each do |combi|
-      rows << [combi] + tournaments.map{|t| ((changes[t][combi] || 0).to_f / totals[t] * 100).round(2) }
-    end
-
-    Writer.google_drive("#{format.to_s.first}Combi", rows)
-  end
-
-  task dump_final: :environment do
+  task final: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     period = Period.current
     rows = [%w[大会ID 日付 ユーザーID ユーザー名 順位 デッキタイプ1 デッキタイプ2 デッキURL1 デッキURL2]]

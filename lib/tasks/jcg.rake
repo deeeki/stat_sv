@@ -279,11 +279,12 @@ namespace :jcg do
 
   task winrate: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    date_from = ENV['DATE_FROM'] ? ENV['DATE_FROM'] : nil
 
     tournament = Tournament.with_format(format).where(round: /予選/).order(held_on: :desc).first
     top_usage = tournament.usage.take(10).to_h
     archetype_names = top_usage.keys
-    stats = Battle.stats(format: format)
+    stats = Battle.stats(format: format, date_from: date_from)
 
     header = ['', '使用率込勝率'] + top_usage.keys
     rows = [header.map{|c| c.split('').join("\n") }]
@@ -294,6 +295,6 @@ namespace :jcg do
       rows << [archetype_name, formula] + archetype_names.map{|n| stats.formula_rates[archetype_name][n] }
     end
 
-    Writer.google_drive("#{format.to_s.first}Winrate", rows)
+    Writer.google_drive("#{format.to_s.first}Winrate#{date_from}", rows)
   end
 end

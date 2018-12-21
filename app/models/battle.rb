@@ -15,13 +15,14 @@ class Battle
   belongs_to :lost_clan, class_name: 'Clan'
 
   class << self
-    def stats format: :rotation, period: Period.current
+    def stats format: :rotation, period: Period.current, date_from: nil
+      date_from ||= period.started_on
       archetypes = period.archetypes.with_format(format)
       inner_hash = Hash[archetypes.map{|a| [a.name, 0] }]
       outer_hash = Hash[archetypes.map{|a| [a.name, inner_hash.deep_dup] }]
       wins, battles, rates, formula_rates = 4.times.map{ outer_hash.deep_dup }
 
-      Battle.with_format(format).gte(battled_on: period.started_on).each do |b|
+      Battle.with_format(format).gte(battled_on: date_from).each do |b|
         next if !b.won_archetype || !b.lost_archetype
         battles[b.won_archetype.name][b.lost_archetype.name] += 1
         battles[b.lost_archetype.name][b.won_archetype.name] += 1

@@ -23,4 +23,5 @@ Period.find_or_create_by(card_set_code: :bos, sequence: 3, started_on: Date.new(
 Period.find_or_create_by(card_set_code: :oot, sequence: 1, started_on: Date.new(2018, 9, 27), ended_on: Date.new(2018, 10, 29))
 Period.find_or_create_by(card_set_code: :oot, sequence: 2, started_on: Date.new(2018, 10, 30), ended_on: Date.new(2018, 11, 25))
 Period.find_or_create_by(card_set_code: :oot, sequence: 3, started_on: Date.new(2018, 11, 26), ended_on: Date.new(2018, 12, 26))
-Period.find_or_create_by(card_set_code: :alt, sequence: 1, started_on: Date.new(2018, 12, 27), ended_on: Date.new(2019, 1, 27))
+Period.find_or_create_by(card_set_code: :alt, sequence: 1, started_on: Date.new(2018, 12, 27), ended_on: Date.new(2019, 1, 16))
+Period.find_or_create_by(card_set_code: :alt, sequence: 2, started_on: Date.new(2019, 1, 17), ended_on: Date.new(2019, 2, 18))

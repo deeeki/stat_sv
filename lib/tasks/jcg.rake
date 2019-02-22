@@ -212,7 +212,7 @@ namespace :jcg do
     Writer.google_drive("#{format.to_s.first}Combi", rows)
   end
 
-  task qualifier: :environment do
+  task stats: :environment do
     DEFAULTS = { used: 0, qualified: 0, sample_url: nil }.freeze
     stats = {}
 

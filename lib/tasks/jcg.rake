@@ -247,6 +247,19 @@ namespace :jcg do
     Writer.google_drive(ws_name, rows)
   end
 
+  task qualifier: :environment do
+    format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
+    period = Period.current
+    rows = [%w[大会ID 日付 ユーザーID ユーザー名 グループ デッキタイプ1 デッキタイプ2 デッキURL1 デッキURL2]]
+    Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).order(held_on: :desc).each do |tournament|
+      rows += tournament.players.where(rank: 1).map do |p|
+        [tournament.id, tournament.held_on, p.user_id, p.name, p.group, p.archetype1&.name, p.archetype2&.name, p.deck_url1, p.deck_url2]
+      end
+    end
+
+    Writer.google_drive("#{format.to_s.first}Qualifier", rows)
+  end
+
   task final: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     period = Period.current

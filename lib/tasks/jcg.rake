@@ -159,9 +159,9 @@ namespace :jcg do
 
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     period = Period.current
-    DEFAULTS = Hash[period.archetypes.with_format(format).map{|a| [a, 0] }].freeze
+    defaults = Hash[period.archetypes.with_format(format).map{|a| [a, 0] }].freeze
     Tournament.with_format(format).where(round: /予選/).gte(held_on: period.started_on).order(held_on: :asc).each do |tournament|
-      stats = DEFAULTS.dup
+      stats = defaults.dup
       tournament.players.each do |player|
         stats[player.archetype1] += 1 if player.archetype1
         stats[player.archetype2] += 1 if player.archetype2
@@ -213,15 +213,15 @@ namespace :jcg do
   end
 
   task stats: :environment do
-    DEFAULTS = { used: 0, qualified: 0, sample_url: nil }.freeze
+    defaults = { used: 0, qualified: 0, sample_url: nil }.freeze
     stats = {}
 
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
     tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: /予選/).gte(held_on: Period.current.started_on).pluck(:id)
     players = Player.in(tournament_id: tournament_ids)
     players.each do |player|
-      stats[player.archetype1] ||= DEFAULTS.dup
-      stats[player.archetype2] ||= DEFAULTS.dup
+      stats[player.archetype1] ||= defaults.dup
+      stats[player.archetype2] ||= defaults.dup
       stats[player.archetype1][:used] += 1
       stats[player.archetype2][:used] += 1
       if player.rank == 1

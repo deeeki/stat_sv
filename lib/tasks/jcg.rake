@@ -153,6 +153,8 @@ namespace :jcg do
     players.each(&:update_archetypes)
   end
 
+  task export: [:usage, :usage_combi, :battle, :winrate, :final, :qualifier, :stats]
+
   task usage: :environment do
     changes = {}
     totals = {}

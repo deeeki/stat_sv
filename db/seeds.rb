@@ -26,3 +26,4 @@ Period.find_or_create_by(card_set_code: :oot, sequence: 3, started_on: Date.new(
 Period.find_or_create_by(card_set_code: :alt, sequence: 1, started_on: Date.new(2018, 12, 27), ended_on: Date.new(2019, 1, 16))
 Period.find_or_create_by(card_set_code: :alt, sequence: 2, started_on: Date.new(2019, 1, 17), ended_on: Date.new(2019, 2, 18))
 Period.find_or_create_by(card_set_code: :alt, sequence: 3, started_on: Date.new(2019, 2, 19), ended_on: Date.new(2019, 3, 27))
+Period.find_or_create_by(card_set_code: :str, sequence: 1, started_on: Date.new(2019, 3, 28), ended_on: Date.new(2019, 4, 24))

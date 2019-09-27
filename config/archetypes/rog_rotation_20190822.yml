@@ -1,0 +1,466 @@
+---
+- clan_id: 1
+  name: ハイランダーE
+  detection_order: 1
+  conditions:
+  - 6ZnUo: 3 # マゼルベイン
+- clan_id: 1
+  name: サタンE
+  detection_order: 2
+  conditions:
+  - 6dbdo: 3 # サタン
+  - 6dbdo: 2 # サタン
+    6VwvY: 1 # ルリア
+- clan_id: 1
+  name: コンボE
+  detection_order: 3
+  conditions:
+  - 6lZu2: 3 # 豪風のリノセウス
+- clan_id: 1
+  name: 機械E
+  detection_order: 4
+  conditions:
+  - 6hoBS: 3 # クリフト
+  - 6hgss: 3 # 機械ミノムシ
+- clan_id: 1
+  name: 進化E
+  detection_order: 5
+  conditions:
+  - 6hPmy: 1 # オーディン
+    6hoBI: 3 # シンシア
+  - 6lDvy: 2 # ゼウス
+  - 6lDvo: 2 # オリヴィエ
+- clan_id: 1
+  name: 異形E
+  detection_order: 6
+  conditions:
+  - 6WLmc: 3 # 異形
+  - 6WLmc: 2 # 異形
+    6a9vc: 3 # リザ
+- clan_id: 1
+  name: バーストE
+  detection_order: 7
+  conditions:
+  - 6WK2w: 3 # バーストショット
+  - 6WK2w: 2 # バーストショット
+    6WEwo: 1 # 妖精の森
+- clan_id: 1
+  name: アグロE
+  detection_order: 8
+  conditions:
+  - 5zWm2: 2 # ゴブリン
+    6a7TM: 3 # リリィ
+    6WLmI: 0 # コルワ
+  - 6dxcM: 3 # リナ＆レナ
+- clan_id: 1
+  name: ミッドE
+  detection_order: 9
+  conditions:
+  - 6SXdI: 2 # ユグドラシル
+  - 6WJKC: 2 # メーテラ
+  - 6WLmI: 2 # コルワ
+  - 6a7T2: 2 # ベイル
+  - 6ZnUy: 2 # ギルネリーゼ
+  - 6lcKS: 2 # ティスタ
+- clan_id: 2
+  name: ハイランダーR
+  detection_order: 1
+  conditions:
+  - 6ZnUo: 3 # マゼルベイン
+- clan_id: 2
+  name: サタンR
+  detection_order: 2
+  conditions:
+  - 6dbdo: 3 # サタン
+  - 6dbdo: 2 # サタン
+    6VwvY: 1 # ルリア
+- clan_id: 2
+  name: 潜伏R
+  detection_order: 3
+  conditions:
+  - 6eK0Y: 3 # リオード
+    6i3_w: 3 # 二刀流
+  - 6ltQM: 2 # 旅ガエル
+- clan_id: 2
+  name: 兵士の誓いR
+  detection_order: 4
+  conditions:
+  - 6eKGA: 2 # 兵士の誓い
+- clan_id: 2
+  name: ディスカードR
+  detection_order: 5
+  conditions:
+  - 6eHaI: 2 # 狂槍のケンタウロス
+- clan_id: 2
+  name: マグノリアR
+  detection_order: 6
+  conditions:
+  - 6aYK6: 3 # マグノリア
+- clan_id: 2
+  name: 機械R
+  detection_order: 7
+  conditions:
+  - 6i89Y: 3 # トランプルフォートレス
+- clan_id: 2
+  name: アグロR
+  detection_order: 8
+  conditions:
+  - 5-Hb2: 3 # クイブレ
+    5zWm2: 3 # ゴブリン
+    6eMSo: 0 # 炎獅子の大将軍
+- clan_id: 2
+  name: コンR
+  detection_order: 9
+  conditions:
+  - 6aYJy: 3 # ジライヤ
+- clan_id: 2
+  name: ミッドR
+  detection_order: 10
+  conditions:
+  - 6WiTQ: 2 # ドラゴンナイツ
+  - 6aYJo: 3 # オクトリス
+  - 6aVti: 3 # 簒奪の使徒
+  - 6iAbo: 3 # リーシャ
+  - 6l-ko: 3 # アルビダ
+- clan_id: 3
+  name: ハイランダーW
+  detection_order: 1
+  conditions:
+  - 6ZnUo: 3 # マゼルベイン
+- clan_id: 3
+  name: サタンW
+  detection_order: 2
+  conditions:
+  - 6dbdo: 3 # サタン
+  - 6dbdo: 2 # サタン
+    6VwvY: 1 # ルリア
+- clan_id: 3
+  name: 進化W
+  detection_order: 3
+  conditions:
+  - 6mN9I: 3 # ジンジャー
+  - 6mN9I: 2 # ジンジャー
+    6eiRC: 3 # モニカ
+- clan_id: 3
+  name: 機械W
+  detection_order: 4
+  conditions:
+  - 6mIGy: 3 # マシンブックソーサラー
+- clan_id: 3
+  name: 開闢W
+  detection_order: 5
+  conditions:
+  - 6awkI: 1 # 開闢の予言者
+- clan_id: 3
+  name: バーンW
+  detection_order: 6
+  conditions:
+  - 6awkc: 3 # オリハルコンゴーレム
+    6edYi: 3 # 真実の狂信者
+    6iWaC: 3 # クラーク
+- clan_id: 3
+  name: 秘術W
+  detection_order: 7
+  conditions:
+  - 6awkc: 3 # オリハルコンゴーレム
+  - 6ektI: 2 # 災厄獣
+  - 6iZ0I: 3 # マギサ
+  - 6mN9S: 2 # エラスムス
+- clan_id: 3
+  name: マナリアW
+  detection_order: 8
+  conditions:
+  - 6auI2: 3 # アン
+  - 6auI2: 2 # アン
+    6X492: 2 # ミラ
+- clan_id: 3
+  name: スペルW
+  detection_order: 9
+  conditions:
+  - 5-iRo: 2 # フレイムデストロイヤー
+  - 6X6bS: 2 # 絶望のキマイラ
+  - 6asag: 3 # 真実の宣告
+  - 6ektS: 2 # スウィート☆メドゥーサ
+  - 6edYi: 3 # 真実の狂信者
+  - 6iZ0c: 3 # ソロモン
+  - 6mNuA: 2 # 究極練成
+- clan_id: 4
+  name: ハイランダーD
+  detection_order: 1
+  conditions:
+  - 6ZnUo: 3 # マゼルベイン
+- clan_id: 4
+  name: サタンD
+  detection_order: 2
+  conditions:
+  - 6dbdo: 2 # サタン
+  - 6dbdo: 1 # サタン
+    6VwvY: 1 # ルリア
+- clan_id: 4
+  name: 進化D
+  detection_order: 3
+  conditions:
+  - 6lDvy: 2 # ゼウス
+  - 6lDvo: 2 # オリヴィエ
+- clan_id: 4
+  name: 財宝D
+  detection_order: 4
+  conditions:
+  - 6mjco: 3 # 竜の財宝
+- clan_id: 4
+  name: ジャバD
+  detection_order: 5
+  conditions:
+  - 6bJ8y: 3 # ジャバウォック
+- clan_id: 4
+  name: 疾走D
+  detection_order: 6
+  conditions:
+  - 6bGiY: 3 # 侮蔑の使徒
+  - 6bGiY: 2 # 侮蔑の使徒
+    6ZjLA: 2 # 飢餓の輝き
+  - 6f7Ho: 3 # 天翔けるドラゴニュート
+- clan_id: 4
+  name: アグロD
+  detection_order: 7
+  conditions:
+  - 5zWm2: 3 # ゴブリン
+  - 6iu-Y: 3 # 飛翔の竜人
+- clan_id: 4
+  name: ランプD
+  detection_order: 8
+  conditions:
+  - 6XSZY: 3 # スカーサハ
+  - 6XSZs: 3 # ポセイドン
+  - 6bGii: 3 # 白亜の竜騎士
+  - 6mlZo: 3 # ジェネシス
+- clan_id: 5
+  name: ハイランダーNc
+  detection_order: 1
+  conditions:
+  - 6ZnUo: 3 # マゼルベイン
+- clan_id: 5
+  name: サタンNc
+  detection_order: 2
+  conditions:
+  - 6dbdo: 3 # サタン
+  - 6dbdo: 2 # サタン
+    6VwvY: 1 # ルリア
+- clan_id: 5
+  name: ハデスNc
+  detection_order: 3
+  conditions:
+  - 6n7-I: 3 # ハデス
+- clan_id: 5
+  name: 機械Nc
+  detection_order: 4
+  conditions:
+  - 6jJrS: 3 # エンネア
+- clan_id: 5
+  name: 進化Nc
+  detection_order: 5
+  conditions:
+  - 6hISC: 3 # フニカル
+    6hKuS: 3 # ヤヴンハール
+- clan_id: 5
+  name: リアニNc
+  detection_order: 6
+  conditions:
+  - 6XtQS: 2 # モルディカイ
+  - 6fVic: 3 # タルタロス
+- clan_id: 5
+  name: アグロNc
+  detection_order: 7
+  conditions:
+  - 5zWm2: 3 # ゴブリン
+    6bf7M: 2 # レイヴン
+  - 6n0fY: 3 # ミーノ
+    6bf7M: 2 # レイヴン
+- clan_id: 5
+  name: ミッドNc
+  detection_order: 8
+  conditions:
+  - 6bhZI: 2 # ケルベロス
+  - 6fViI: 2 # ゼベット
+  - 6jJrI: 2 # セレス
+- clan_id: 6
+  name: ハイランダーV
+  detection_order: 1
+  conditions:
+  - 6ZnUo: 3 # マゼルベイン
+- clan_id: 6
+  name: サタンV
+  detection_order: 2
+  conditions:
+  - 6dbdo: 3 # サタン
+  - 6dbdo: 2 # サタン
+    6VwvY: 1 # ルリア
+- clan_id: 6
+  name: 機械復讐V
+  detection_order: 3
+  conditions:
+  - 6jiFy: 3 # モノ
+    6nTyY: 2 # アザゼル
+    6jfpY: 2 # 破滅のサキュバス
+  - 6jiFy: 3 # モノ
+    6nTyY: 3 # アザゼル
+- clan_id: 6
+  name: 機械V
+  detection_order: 4
+  conditions:
+  - 6jiG6: 3 # スレイ
+  - 6jiFy: 3 # モノ
+    6jiG6: 2 # スレイ
+  - 6jiFy: 3 # モノ
+    6nTyY: 0 # アザゼル
+- clan_id: 6
+  name: 進化V
+  detection_order: 5
+  conditions:
+  - 6hISC: 3 # フニカル
+  - 6hISC: 2 # フニカル
+    6lDvy: 1 # ゼウス
+- clan_id: 6
+  name: ローズクイーンV
+  detection_order: 6
+  conditions:
+  - 6fu6y: 2 # ローズクイーン
+- clan_id: 6
+  name: プルソンV
+  detection_order: 7
+  conditions:
+  - 6YFqy: 2 # プルソン
+- clan_id: 6
+  name: 自傷V
+  detection_order: 8
+  conditions:
+  - 6c3zo: 2 # ヴァーナレク
+    6nR_Y: 3 # 加虐の独房
+- clan_id: 6
+  name: 血統V
+  detection_order: 9
+  conditions:
+  - 6UPFY: 3 # 血統の王
+- clan_id: 6
+  name: アグロV
+  detection_order: 10
+  conditions:
+  - 5zWm2: 2 # ゴブリン
+    5_pFW: 2 # インプランサー
+    6UPFY: 0 # 血糖の王
+  - 5zWm2: 2 # ゴブリン
+    6UMpI: 3 # ギルティブラッドメイデン・ブラー
+    6UPFY: 0 # 血糖の王
+- clan_id: 6
+  name: 復讐V
+  detection_order: 11
+  conditions:
+  - 6fu76: 3 # ラウラ
+  - 6frgi: 3 # ライカンベルセルク
+  - 6YDOi: 2 # ナルメア
+    5_pFg: 2 # ダークジェネラル
+  - 5_pFg: 3 # ダークジェネラル
+  - 6c3-6: 3 # ミルナード
+  - 6nTyY: 3 # アザゼル
+    6jiFy: 0 # モノ
+- clan_id: 7
+  name: ハイランダーB
+  detection_order: 1
+  conditions:
+  - 6ZnUo: 3 # マゼルベイン
+- clan_id: 7
+  name: サタンB
+  detection_order: 2
+  conditions:
+  - 6dbdo: 2 # サタン
+  - 6dbdo: 1 # サタン
+    6VwvY: 1 # ルリア
+- clan_id: 7
+  name: エイラB
+  detection_order: 3
+  conditions:
+  - 6nupS: 3 # 清純なる祈り・エイラ
+- clan_id: 7
+  name: 機械B
+  detection_order: 3
+  conditions:
+  - 6k4gS: 3 # リモニウム
+    6nupS: 0 # 清純なる祈り・エイラ
+- clan_id: 7
+  name: 聖獣B
+  detection_order: 4
+  conditions:
+  - 6gGXc: 3 # 楽園の聖獣
+    6YbpC: 3 # ペトラ
+    6UjWQ: 0 # 聖獅子の結晶
+- clan_id: 7
+  name: ラピスB
+  detection_order: 5
+  conditions:
+  - 6cSOI: 2 # 熾天使ラピス
+- clan_id: 7
+  name: チェキババB
+  detection_order: 6
+  conditions:
+  - 6YeFc: 2 # チェキババ
+- clan_id: 7
+  name: カウントダウンB
+  detection_order: 7
+  conditions:
+  - 6YeFS: 3 # ガルラ
+  - 6cQBg: 1 # 黄金都市
+- clan_id: 7
+  name: ミッドB
+  detection_order: 8
+  conditions:
+  - 6gGXS: 3 # ヘクター
+- clan_id: 8
+  name: ハイランダーNm
+  detection_order: 1
+  conditions:
+  - 6ZnUo: 3 # マゼルベイン
+- clan_id: 8
+  name: サタンNm
+  detection_order: 2
+  conditions:
+  - 6dbdo: 3 # サタン
+  - 6dbdo: 2 # サタン
+    6VwvY: 1 # ルリア
+- clan_id: 8
+  name: 機械Nm
+  detection_order: 3
+  conditions:
+  - 6kT4o: 3 # グライアス
+  - 6kT56: 3 # ベルフォメット
+- clan_id: 8
+  name: 球体Nm
+  detection_order: 4
+  conditions:
+  - 6gfR2: 3 # 冒涜の球体
+- clan_id: 8
+  name: リーシェナNm
+  detection_order: 5
+  conditions:
+  - 6cqoo: 2 # リーシェナ
+    6kOCS: 0 # 加速兵
+- clan_id: 8
+  name: AFNm
+  detection_order: 6
+  conditions:
+  - 6gexo: 2 # ダイン
+  - 6kOCS: 3 # 加速兵
+  - 6kT4y: 2 # シオン
+- clan_id: 8
+  name: 人形Nm
+  detection_order: 7
+  conditions:
+  - 6gcVs: 3 # メイシア
+    6cqoo: 0 # リーシェナ
+  - 6oHE6: 3 # オーキス
+    6cqoo: 0 # リーシェナ
+- clan_id: 8
+  name: アグロNm
+  detection_order: 8
+  conditions:
+  - 5zWm2: 2 # ゴブリン
+    6Z0fo: 3 # シルヴァ

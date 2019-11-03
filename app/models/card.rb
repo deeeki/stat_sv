@@ -10,7 +10,10 @@ class Card
   field :char_type, type: Integer
   field :tribe_name, type: String
   field :skill, type: String
+  field :skill_condition, type: String
+  field :skill_target, type: String
   field :skill_option, type: String
+  field :skill_preprocess, type: String
   field :skill_disc, type: String
   field :org_skill_disc, type: String
   field :evo_skill_disc, type: String

@@ -34,3 +34,5 @@ Period.find_or_create_by(card_set_code: :rog, sequence: 3, started_on: Date.new(
 Period.find_or_create_by(card_set_code: :rog, sequence: 4, started_on: Date.new(2019, 8, 22), ended_on: Date.new(2019, 9, 25))
 Period.find_or_create_by(card_set_code: :vec, sequence: 1, started_on: Date.new(2019, 9, 26), ended_on: Date.new(2019, 10, 28))
 Period.find_or_create_by(card_set_code: :vec, sequence: 2, started_on: Date.new(2019, 10, 29), ended_on: Date.new(2019, 11, 24))
+Period.find_or_create_by(card_set_code: :vec, sequence: 3, started_on: Date.new(2019, 11, 25), ended_on: Date.new(2019, 12, 12))
+Period.find_or_create_by(card_set_code: :vec, sequence: 4, started_on: Date.new(2019, 12, 13), ended_on: Date.new(2019, 12, 27))

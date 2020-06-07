@@ -39,4 +39,5 @@ Period.find_or_create_by(card_set_code: :vec, sequence: 4, started_on: Date.new(
 Period.find_or_create_by(card_set_code: :ucl, sequence: 1, started_on: Date.new(2019, 12, 28), ended_on: Date.new(2020, 2, 19))
 Period.find_or_create_by(card_set_code: :ucl, sequence: 2, started_on: Date.new(2020, 2, 20), ended_on: Date.new(2020, 3, 29))
 Period.find_or_create_by(card_set_code: :wup, sequence: 1, started_on: Date.new(2020, 3, 30), ended_on: Date.new(2020, 4, 1))
-Period.find_or_create_by(card_set_code: :wup, sequence: 2, started_on: Date.new(2020, 4, 2), ended_on: Date.new(2020, 4, 27))
+Period.find_or_create_by(card_set_code: :wup, sequence: 2, started_on: Date.new(2020, 4, 2), ended_on: Date.new(2020, 5, 20))
+Period.find_or_create_by(card_set_code: :wup, sequence: 3, started_on: Date.new(2020, 5, 21), ended_on: Date.new(2020, 6, 28))

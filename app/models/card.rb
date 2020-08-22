@@ -6,6 +6,7 @@ class Card
   field :foil_card_id, type: Integer
   field :card_set_id, type: Integer
   field :card_name, type: String
+  field :card_name_ruby, type: String
   field :is_foil, type: Integer
   field :char_type, type: Integer
   field :tribe_name, type: String

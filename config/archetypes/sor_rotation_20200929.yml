@@ -1,0 +1,359 @@
+---
+- clan_id: 1
+  name: ロキサスE
+  detection_order: 1
+  conditions:
+  - 72h1S: 3 # ロキサス
+- clan_id: 1
+  name: 異形E
+  detection_order: 2
+  conditions:
+  - 6-suS: 3 # 異形
+    6pQTI: 0 # アマツ
+- clan_id: 1
+  name: ローフラE
+  detection_order: 3
+  conditions:
+  - 6-suI: 3 # ローフラッド
+    72h1S: 0 # ロキサス
+    6pQTI: 0 # アマツ
+- clan_id: 1
+  name: 密林E
+  detection_order: 4
+  conditions:
+  - 6t7HY: 3 # 守人
+- clan_id: 1
+  name: アマツE
+  detection_order: 5
+  conditions:
+  - 6pQTI: 3 # アマツ
+- clan_id: 1
+  name: 自然E
+  detection_order: 6
+  conditions:
+  - 6pJ8s: 3 # スケアリートレント
+- clan_id: 1
+  name: 機械E
+  detection_order: 7
+  conditions:
+  - 6x2lS: 2 # ダミアン
+- clan_id: 1
+  name: コンE
+  detection_order: 8
+  conditions:
+  - 6pQTc: 3 # プライマルギガント
+- clan_id: 1
+  name: アグロE
+  detection_order: 9
+  conditions:
+  - 6pLao: 3 # スピアーエルフ
+  - 6t7Hs: 3 # ハンマーモンキー
+  - 6pOlw: 3 # 神鉄圧錬法
+- clan_id: 2
+  name: 連携R
+  detection_order: 1
+  conditions:
+  - 6-UTy: 3 # フェイラン
+  - 5-HbC: 2 # オースレスナイト
+    6-UTy: 2 # フェイラン
+- clan_id: 2
+  name: 自然R
+  detection_order: 2
+  conditions:
+  - 6poty: 3 # ベイリオン
+  - 6phZM: 3 # ハルバードウルフ
+  - 6tViM: 3 # フォックスランサー
+- clan_id: 2
+  name: 進化R
+  detection_order: 3
+  conditions:
+  - 6tY8S: 2 # デュアルブレイダー
+  - 6td16: 2 # アンリエット
+  - 6-SmQ: 2 # 堕落の決意
+  - 6_FIy: 2 # ダイヤモンドパラディン
+  - 6_FJ6: 2 # アルヤスカ
+  - 733Ry: 2 # ナハト・ナハト
+- clan_id: 2
+  name: 機械R
+  detection_order: 4
+  conditions:
+  - 6xR9y: 3 # グレイソン
+- clan_id: 2
+  name: 御旗R
+  detection_order: 5
+  conditions:
+  - 5-KGw: 3 # 御旗
+- clan_id: 3
+  name: マイザーW
+  detection_order: 1
+  conditions:
+  - 73RsI: 3 # マイザー
+- clan_id: 3
+  name: ヴィンセントW
+  detection_order: 2
+  conditions:
+  - 73RsS: 1 # ヴィンセント
+    73KXY: 3 # 保安官補
+- clan_id: 3
+  name: キャルW
+  detection_order: 3
+  conditions:
+  - 6t_RS: 2 # キャル
+    6q8s2: 0 # ライリー
+    6t_RI: 0 # クオン
+    6_djS: 0 # アダマンタイト
+- clan_id: 3
+  name: 専門店W
+  detection_order: 4
+  conditions:
+  - 6q95g: 3 # 魔道具専門店
+- clan_id: 3
+  name: 自然W
+  detection_order: 5
+  conditions:
+  - 6q8s2: 3 # ライリー
+- clan_id: 3
+  name: 機械W
+  detection_order: 6
+  conditions:
+  - 6mIGy: 3 # マシンブックソーサラー
+  - 6xpaS: 1 # レガロア
+- clan_id: 3
+  name: 秘術W
+  detection_order: 7
+  conditions:
+  - 6_djS: 2 # アダマンタイト
+  - 6_bH2: 2 # 魔導の君臨者
+  - 6xkhy: 3 # 境界の魔道士
+- clan_id: 3
+  name: スペルW
+  detection_order: 8
+  conditions:
+  - 5-iRo: 2 # フレイムデストロイヤー
+  - 6t_RI: 2 # クオン
+  - 6xpaI: 3 # ドロシー
+  - 6_djc: 3 # ルーニィ
+- clan_id: 4
+  name: ホエールD
+  detection_order: 1
+  conditions:
+  - 6_zhi: 1 # ホエール
+    6yB-y: 0 # プレシオサウルス
+  - 6_zhi: 1 # ホエール
+    6_zhY: 3 # 虐殺のドラゴニュ＝と
+- clan_id: 4
+  name: ギルヴァD
+  detection_order: 2
+  conditions:
+  - 6yB_6: 1 # ギルヴァ
+    5_5bA: 3 # 灼熱の嵐
+  - 6yB_6: 2 # ギルヴァ
+    6yB-y: 0 # プレシオサウルス
+- clan_id: 4
+  name: ディスカD
+  detection_order: 3
+  conditions:
+  - 6yB-y: 1 # プレシオサウルス
+    7007y: 2 # 大逆
+- clan_id: 4
+  name: 自然D
+  detection_order: 4
+  conditions:
+  - 6qZiy: 2 # ヴァイディ
+- clan_id: 4
+  name: 機械D
+  detection_order: 5
+  conditions:
+  - 6y76I: 2 # アマルガムドラゴン
+    6qZiy: 0 # ヴァイディ
+- clan_id: 4
+  name: アグロD
+  detection_order: 6
+  conditions:
+  - 5zWm2: 3 # ゴブリン
+    6qXGi: 3 # マリオン
+- clan_id: 4
+  name: ランプD
+  detection_order: 7
+  conditions:
+  - 6yB-y: 2 # プレシオサウルス
+  - 73qGy: 2 # レジー
+  - 73qGo: 2 # 禁忌
+- clan_id: 5
+  name: アグロNc
+  detection_order: 1
+  conditions:
+  - 745MY: 3 # 恨みの語り部
+  - 747oy: 3 # 暗がりの悪霊
+- clan_id: 5
+  name: ネフティスNc
+  detection_order: 2
+  conditions:
+  - 70OYc: 3 # ネフティス
+- clan_id: 5
+  name: グレモリーNc
+  detection_order: 3
+  conditions:
+  - 74ChS: 2 # トリニティモンスターズ
+    70OYS: 0 # 征伐の死帝
+- clan_id: 5
+  name: 葬送Nc
+  detection_order: 4
+  conditions:
+  - 70OYS: 2 # 征伐の死帝
+  - 70OYS: 1 # 征伐の死帝
+    70OYI: 2 # ミルティオ
+- clan_id: 5
+  name: 妖怪Nc
+  detection_order: 5
+  conditions:
+  - 6umGI: 2 # ギンセツ
+  - 6ujqC: 3 # 酒天童子
+    70OYS: 0 # 征伐の死帝
+- clan_id: 5
+  name: 自然Nc
+  detection_order: 6
+  conditions:
+  - 6qy7I: 3 # ルベル
+- clan_id: 5
+  name: 機械Nc
+  detection_order: 7
+  conditions:
+  - 6yaPS: 3 # デッドメタルスター
+    6umGI: 0 # ギンセツ
+    70OYS: 0 # 征伐の死帝
+- clan_id: 5
+  name: コンNc
+  detection_order: 8
+  conditions:
+  - 6qy7S: 2 # トート
+    6yaPc: 2 # ナイトメアイーター
+- clan_id: 6
+  name: ボルテオV
+  detection_order: 1
+  conditions:
+  - 74b5o: 3 # ボルテオ
+- clan_id: 6
+  name: バアルV
+  detection_order: 2
+  conditions:
+  - 70mz6: 3 # バアル
+    6ywNi: 3 # 背徳の狂獣
+- clan_id: 6
+  name: 狂乱V
+  detection_order: 3
+  conditions:
+  - 70myy: 2 # ダルホード
+  - 6rI5s: 3 # バルト
+  - 6rKY6: 3 # クドラク
+    6rKXy: 0 # 胎動の魔神
+  - 6v8h6: 3 # ベヒーモス
+    70mz6: 0 # バアル
+- clan_id: 6
+  name: コンV
+  detection_order: 4
+  conditions:
+  - 70myo: 3 # ルーゼン
+  - 6-UTo: 2 # ゼルガネイア
+    6rGOA: 3 # インサニティ・マナ
+- clan_id: 6
+  name: ミッドV
+  detection_order: 5
+  conditions:
+  - 6v8gy: 2 # イリヤ
+    5_p-4: 2 # 鋭利な一裂き
+  - 6ytxS: 2 # 凶槍の戦士
+    5_p-4: 2 # 鋭利な一裂き
+- clan_id: 6
+  name: 自然V
+  detection_order: 6
+  conditions:
+  - 6rKXy: 1 # 胎動の魔神
+    5_p-4: 0 # 鋭利な一裂き
+  - 6rKXy: 1 # 胎動の魔神
+    6rGOA: 3 # インサニティ・マナ
+  - 6yyq6: 2 # ルインウェブスパイダー
+- clan_id: 6
+  name: アグロV
+  detection_order: 7
+  conditions:
+  - 5zWm2: 2 # ゴブリン
+  - 6rI5Y: 2 # シャランゼア
+- clan_id: 6
+  name: 復讐V
+  detection_order: 8
+  conditions:
+  - 5_pFg: 3 # ダークジェネラル
+  - 6nTyY: 3 # アザゼル
+- clan_id: 7
+  name: セリーナB
+  detection_order: 1
+  conditions:
+  - 74zWI: 3 # セリーナ
+- clan_id: 7
+  name: 清浄B
+  detection_order: 2
+  conditions:
+  - 74xJg: 3 # 清浄の領域
+- clan_id: 7
+  name: サタンB
+  detection_order: 3
+  conditions:
+  - 717QI: 1 # 邪教の神殿
+    74zWI: 0 # セリーナ
+- clan_id: 7
+  name: 守護B
+  detection_order: 4
+  conditions:
+  - 6vX5I: 3 # ウィルバート
+- clan_id: 7
+  name: 自然B
+  detection_order: 5
+  conditions:
+  - 6riyI: 3 # ミルフィ
+  - 6rgWC: 3 # アニエス
+- clan_id: 7
+  name: カウントダウンB
+  detection_order: 6
+  conditions:
+  - 6riyS: 3 # スフィンクス
+  - 6vPmi: 3 # カームフェザーフォルク
+- clan_id: 7
+  name: コンB
+  detection_order: 7
+  conditions:
+  - 719Nc: 1 # ラー
+- clan_id: 8
+  name: コンNm
+  detection_order: 1
+  conditions:
+  - 6vvVo: 3 # カルラ
+  - 6s65g: 3 # ラグナアウェイク
+  - 71Xny: 3 # ディメンションドミネーター
+  - 71Xno: 3 # スロース
+- clan_id: 8
+  name: 自然Nm
+  detection_order: 2
+  conditions:
+  - 6s5Mo: 2 # メタルゴリラ
+- clan_id: 8
+  name: 機械Nm
+  detection_order: 3
+  conditions:
+  - 6zjey: 3 # ベルフォメット
+    6s5My: 0 # モデスト
+  - 6zjf6: 3 # マシンベア
+- clan_id: 8
+  name: AFNm
+  detection_order: 4
+  conditions:
+  - 6s5My: 2 # モデスト
+  - 6vvW6: 2 # コロニー
+  - 75JUY: 2 # ジャスパー
+- clan_id: 8
+  name: 人形Nm
+  detection_order: 5
+  conditions:
+  - 6vr6Y: 3 # パペットボックス
+    6s65g: 0 # ラグナアウェイク
+  - 60dFA: 2 # 人形使いの糸

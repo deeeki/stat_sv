@@ -46,4 +46,5 @@ Period.find_or_create_by(card_set_code: :foh, sequence: 2, started_on: Date.new(
 Period.find_or_create_by(card_set_code: :foh, sequence: 3, started_on: Date.new(2020, 8, 20), ended_on: Date.new(2020, 9, 28))
 Period.find_or_create_by(card_set_code: :sor, sequence: 1, started_on: Date.new(2020, 9, 29), ended_on: Date.new(2020, 10, 27))
 Period.find_or_create_by(card_set_code: :sor, sequence: 2, started_on: Date.new(2020, 10, 28), ended_on: Date.new(2020, 11, 18))
-Period.find_or_create_by(card_set_code: :sor, sequence: 3, started_on: Date.new(2020, 11, 19), ended_on: Date.new(2020, 12, 27))
+Period.find_or_create_by(card_set_code: :sor, sequence: 3, started_on: Date.new(2020, 11, 19), ended_on: Date.new(2020, 12, 6))
+Period.find_or_create_by(card_set_code: :sor, sequence: 4, started_on: Date.new(2020, 12, 7), ended_on: Date.new(2020, 12, 27))

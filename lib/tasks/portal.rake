@@ -7,7 +7,7 @@ namespace :portal do
     task import: :environment do
       Card.delete_all
 
-      json = JSON.parse(open(API_URL).read)
+      json = JSON.parse(URI.open(API_URL).read)
       json['data']['cards'].each do |card|
         next if Card.find_by(id: card['card_id'])
         Card.create(card.merge(id: card['card_id'], code: B64.encode(card['card_id'])))

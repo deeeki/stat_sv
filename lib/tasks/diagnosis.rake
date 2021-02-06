@@ -15,12 +15,12 @@ namespace :diagnosis do
     end
 
     clan_index = Hash[Clan.pluck(:id, :name)]
-    rows = [%w[クラス プレイヤー URL]]
+    rows = [%w[クラス プレイヤー]]
     decks.each do |deck|
       hash_str = deck.url.split('/').last
       clan_id = hash_str[2].to_i
       d = Card.human_convert(hash_str)
-      rows << [clan_index[clan_id], deck.player.name, deck.url] + d.to_a.flatten
+      rows << [clan_index[clan_id], deck.player.name] + d.to_a.flatten
     end
 
     Writer.csv('tmp/failed_decks.csv', rows)

@@ -1,22 +1,20 @@
 AGENT = Mechanize.new
 
-COMPE    = 'https://sv.j-cg.com/compe/'
-TOUR     = 'https://sv.j-cg.com/compe/view/tour/'
-GAMELIST = 'https://sv.j-cg.com/compe/view/gamelist/'
-MATCH    = 'https://sv.j-cg.com/compe/view/match/'
-RESULT   = 'https://sv.j-cg.com/compe/view/result/'
+COMPE_LIST = 'https://sv.j-cg.com/past-schedule/'
+RESULTS    = 'https://sv.j-cg.com/competition/%s/results'
+BRACKET    = 'https://sv.j-cg.com/competition/%s/bracket#/1'
+API        = 'https://sv.j-cg.com/api/'
 
 namespace :jcg do
   task fetch: :environment do
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
 
-    compe_page = AGENT.get(COMPE + format.to_s)
-    tours = compe_page.search('tr.competition').map do |row|
+    compe_list_page = AGENT.get(COMPE_LIST + format.to_s)
+    tours = compe_list_page.search('div.schedule-list-item').map do |item|
       OpenStruct.new({
-        date: row.at('td.date').text.strip,
-        url: row.at('td.name > a')['href'],
-        id: row.at('td.name > a')['href'].split('/').last,
-        status: row.at('td.status').text.strip,
+        url: item.at('a.schedule-link')['href'],
+        id: item.at('a.schedule-link')['href'].split('/').last,
+        status: item.at('div.schedule-status').text.strip,
       })
     end.reverse
 
@@ -29,120 +27,75 @@ namespace :jcg do
   end
 
   task result: :environment do
-    player_ranks = {}
-    tour_id = ENV['TOUR'].scan(/\d+/).first
+    tour_id = ENV['TOUR']
 
-    result_page = AGENT.get(RESULT + tour_id)
-    result_page.search('div#jcgcore_entry_list').each do |group_section|
-      group_section.search('a.hover-blue').each_with_index do |player, i|
-        user_id = player['href'].scan(/\d+/).first.to_i
-        player_ranks[user_id] = { rank: i < 3 ? i + 1 : 3 }
-      end
+    player_ranks = {}
+    results_page = AGENT.get(RESULTS % tour_id)
+    results_page.search('div.competition-result-item > div.result').each do |result|
+      rank = result['class'][-1]
+      user_nicename = result.at('div.result-name > a')['href'].split('/').last
+      player_ranks[user_nicename] = { rank: rank.to_i }
     end
-    round = result_page.search('#jcgcore_head_menu h1.jcgcore-h1 span.nobr').last.text.strip
-    name = result_page.at('.twitter-share-button')['data-text'].gsub(round, '').strip
-    date = result_page.at('p.datetime').text.scan(%r[\d+/\d+/\d+]).first
-    format = result_page.at('#jcgcore_category_menu h1.jcgcore-h1 a')['href'].split('/').last
-    tournament = Tournament.find_or_create_by(id: tour_id, name: name, format: format, held_on: Date.parse(date), round: round)
+    round = results_page.at('div.competition-title').text.split(' ').last
+    name = results_page.at('div.competition-title').text.gsub(round, '').strip
+    month_day = results_page.at('div.competition-date').text.split(' ').first
+    year = Date.today.month == 1 && month_day.start_with?('12') ? Date.today.year - 1 : Date.today.year
+    format = name.include?('ローテーション') ? 'rotation' : 'unlimited'
+    tournament = Tournament.find_or_create_by(id: tour_id, name: name, format: format, held_on: Date.parse("#{year}.#{month_day}"), round: round)
 
     group_matches = {}
-    gamelist_page = AGENT.get(GAMELIST + tour_id)
-    gamelist_page.search('div#jcgcore_content_wrap > div.jcgcore_content').each do |group_section|
-      group = group_section.at('h2.jcgcore-h2').text.scan(/\d+/).first
-      group_matches[group] = group_section.search('a.hover-blue').map{|a| a['href'] }.select{|u| u.start_with?(MATCH) }.sort
+    bracket_page = AGENT.get(BRACKET % tour_id)
+    bracket = JSON.parse(bracket_page.at('div.content-inner > script').text.gsub('_INLINE_BRACKET_DATA = ', ''))
+    bracket['groups'].each do |bracket_group|
+      url = %[#{API}competition/group/#{bracket_group['id']}]
+      json_group = JSON.parse(URI.open(url).read)
+      group_matches[bracket_group['code']] = json_group['rounds'].map{|r| r['matches'].map{|m|
+        { id: m['id'], group: bracket_group['code'], round: r['name'], scores: m['teams'].map{|t| t['wins'] } }
+      }}.flatten
     end
 
-    group_matches.each do |group, matches|
-      matches.each do |match_url|
-        page = AGENT.get(match_url)
+    group_matches.each do |group_code, matches|
+      matches.each do |match_attrs|
+        url = %[#{API}competition/match/#{match_attrs[:id]}]
+        json_match = JSON.parse(URI.open(url).read)
 
         players = []
-        page.search('div.team_wrap').each do |team|
-          player = team.at('a.hover-blue')
-          user_id = player['href'].scan(/\d+/).first.to_i
-
-          if stored_player = Player.find_by(tournament: tournament, user_id: user_id)
+        json_match['teams'].each do |team|
+          json_user = team['users'].first
+          if stored_player = Player.find_by(tournament: tournament, user_id: json_user['user'])
             players << stored_player
             next
           end
 
-          player_name = player.text
-          deck_url1, deck_url2 = team.search('a[target="_svp"]').map{|e| e['href'] }.map{|url|
+          deck_url1, deck_url2 = Nokogiri::HTML(json_user['customText']).search('a').map{|a| a['href'] }.map{|url|
             url.sub(%r[deckbuilder/create/\d\?hash=], 'deck/')
           }.sort
 
-          user = User.find_or_create_by(id: user_id)
-          user.update(name: player_name)
+          user = User.find_or_create_by(id: json_user['user'])
+          user.update(name: json_user['name'], nicename: json_user['nicename'])
 
           players << user.players.create({
             tournament: tournament,
-            group: group,
-            name: player_name,
+            group: group_code,
+            name: user.name,
             deck_url1: deck_url1,
             deck_url2: deck_url2,
-          }.merge(player_ranks[user_id] || {}))
+          }.merge(player_ranks[team['nicename']] || {}))
         end
 
-        match = Match.find_or_initialize_by(id: match_url.split('/').last, tournament: tournament)
+        match = tournament.matches.find_or_initialize_by(id: match_attrs[:id])
         if match.new_record?
-          left, right = page.search('p.score > span').map{|s| s.text.strip.to_i }
-          if left > right
-            won_player, lost_player = players.first, players.last
+          if match_attrs['scores'].first > match_attrs['scores'].last
+            match_attrs.merge(won_player: players.first, lost_player: players.last)
           else
-            won_player, lost_player = players.last, players.first
-          end
-          round = page.at('div.breadcrumbs > ul > li.current').text.strip
-
-          match.update(
-            won_player: won_player,
-            lost_player: lost_player,
-            group: group,
-            round: round,
-            scores: [left, right]
-          )
-        end
-
-        next unless players.map(&:name).uniq.count == 2 # Ignore the same name
-
-        games = page.search('ul.game_list > li')
-        next unless games.count == 3 # Can't detect anything if straight wins
-
-        won_player_clans = {}
-        games.each_with_index do |game, i|
-          won_player_name = game.search('span')[2]&.text&.strip
-          won_clan_name = game.search('span')[3]&.text&.strip
-          if !won_player_name || !won_clan_name
-            puts match_url
-            next
+            match_attrs.merge(won_player: players.last, lost_player: players.first)
           end
 
-          won_player_clans[won_player_name] = won_clan_name
-
-          next if i.zero? # Can't detect 1st battle's lost clan/archetype
-
-          won_player = players.find{|p| p.name == won_player_name }
-          lost_player = players.find{|p| p.name != won_player_name }
-          won_clan = won_player.clans.find{|c| c.name == won_clan_name }
-          lost_clan = lost_player.clans.find{|c| c.name != won_player_clans[lost_player.name] }
-
-          next if !won_clan || !lost_clan
-
-          Battle.find_or_create_by(
-            tournament: tournament,
-            format: format,
-            match: match,
-            battled_on: tournament.held_on,
-            number: i + 1,
-            won_player: won_player,
-            lost_player: lost_player,
-            won_clan: won_clan,
-            lost_clan: lost_clan
-          )
+          match.update(match_attrs)
         end
       end
     end
     p tournament
-    puts "Battle count: #{Battle.where(tournament: tournament).count}"
   end
 
   task update_archetypes: :environment do
@@ -219,7 +172,7 @@ namespace :jcg do
     stats = {}
 
     format = ENV['FORMAT'] ? ENV['FORMAT'] : :rotation
-    tournament_ids = ENV['TOUR'] ? [ENV['TOUR'].scan(/\d+/).first] : Tournament.with_format(format).where(round: /予選/).gte(held_on: Period.current.started_on).pluck(:id)
+    tournament_ids = ENV['TOUR'] ? [ENV['TOUR']] : Tournament.with_format(format).where(round: /予選/).gte(held_on: Period.current.started_on).pluck(:id)
     players = Player.in(tournament_id: tournament_ids)
     players.each do |player|
       stats[player.archetype1] ||= defaults.dup
@@ -245,7 +198,7 @@ namespace :jcg do
       rows << [archetype&.name, s[:used], s[:qualified], use_rate, qualified_rate, occupancy, s[:sample_url]]
     end
 
-    ws_name = ENV['TOUR'] ? ENV['TOUR'] : Date.today.strftime('%Y%m')
+    ws_name = ENV['TOUR'] ? Tournament.find_by(id: ENV['TOUR']).held_on.strftime('%y%m%d') : Date.today.strftime('%Y%m')
     Writer.google_drive(ws_name, rows)
   end
 
